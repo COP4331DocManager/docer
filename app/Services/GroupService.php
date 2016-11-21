@@ -13,7 +13,7 @@ class GroupService
 
     public function createGroup($name)
     {
-        $group = new Group([
+        $group = Group::create([
             'name' => $name,
             'user_id' => Auth::id()
         ]);
