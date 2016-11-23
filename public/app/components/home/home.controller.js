@@ -6,15 +6,25 @@
 
     app.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'HomeInfo', 'HomeData'];
-    function HomeController($scope, HomeInfo, HomeData){
-        /*       
+    HomeController.$inject = ['$scope', 'Restangular', 'HomeInfo', 'HomeData'];
+    function HomeController($scope, Restangular, HomeInfo, HomeData){
+        
+        
+         Restangular.all('test').getList().then(function(response) {
+            var plain = response.plain();
+            $scope.slides = plain;
+            //console.log("carousel rest: ", plain);
+        });
+
+
         HomeInfo.getData().then(function(data){
           console.log(data);
-          HomeData.addData(data.groups);
-          console.log(HomeData.getGroups());
+          var stuff = data;
+          console.log(stuff)
+          //HomeData.addData(data.groups);
+          //console.log(HomeData.getGroups());
         });
-        */
+        
         var data = {
             "groups": [
               {

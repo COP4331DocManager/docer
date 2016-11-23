@@ -21,6 +21,7 @@
 		'app.upload',
 		'app.search',
 		'app.account',
+		'app.group',
 	  	'app.group.create',
 
 	  	'app.admin',

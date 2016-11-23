@@ -38,7 +38,9 @@
 		return{
 			restrict: 'E',
 			templateUrl: "/app/components/home/directives/carousel/carouselView.html",
-            controller: CarouselController
+            controller: 'HomeController',
+            controllerAs: 'vm'
+
 		};
 	});
 
