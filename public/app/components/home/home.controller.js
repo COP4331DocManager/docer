@@ -6,8 +6,8 @@
 
     app.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Restangular', 'HomeInfo', 'HomeData'];
-    function HomeController($scope, Restangular, HomeInfo, HomeData){
+    HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData'];
+    function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData){
         
         
          Restangular.all('test').getList().then(function(response) {
