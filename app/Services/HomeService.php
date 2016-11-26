@@ -23,7 +23,7 @@ class HomeService
              ->select('groups.id', 'groups.name')
              ->get();
         foreach($user->groups as &$group) {
-            $group->Members = DB::table('users_groups')
+            $group->members = DB::table('users_groups')
                 ->join('users', 'users.id', '=', 'users_groups.user_id')
                 ->where('users_groups.group_id', '=', $group->id)
                 ->select('users.id', 'users.name')
