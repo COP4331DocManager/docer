@@ -23,7 +23,7 @@
               {
               "id": 1,
               "name": "memes",
-              "Members": [
+              "members": [
                 {
                   "id": 1,
                   "name": "Shitfuck"
@@ -37,7 +37,7 @@
                 {
               "id": 2,
               "name": "Trump",
-              "Members": [
+              "members": [
                 {
                   "id": 2,
                   "name": "Donkey Fucker"
@@ -89,7 +89,6 @@
             };
             
         this.groups = data['groups'];
-
     }
 
 })();
