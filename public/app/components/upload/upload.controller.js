@@ -6,34 +6,40 @@
 
     app.controller('UploadController', UploadController);
 
-    UploadController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData'];
-    function UploadController($rootScope, $scope, Restangular, HomeInfo, HomeData){
-        
-        
-         Restangular.all('test').getList().then(function(response) {
-            var plain = response.plain();
-            $scope.slides = plain;
-            //console.log("carousel rest: ", plain);
-        });
+    UploadController.$inject = ['$rootScope', '$scope'];
 
 
-        HomeInfo.getData().then(function(data){
-          console.log(data);
-          var stuff = data;
-          console.log(stuff)
-          //HomeData.addData(data.groups);
-          //console.log(HomeData.getGroups());
-        });
-    
-   
-    
+    function UploadController($rootScope, $scope){
+
+        //
+        //  Restangular.all('test').getList().then(function(response) {
+        //     var plain = response.plain();
+        //     $scope.slides = plain;
+        //     //console.log("carousel rest: ", plain);
+        // });
+        //
+        //
+        // HomeInfo.getData().then(function(data){
+        //   console.log(data);
+        //   //HomeData.addData(data.groups);
+        //   //console.log(HomeData.getGroups());
+        // });
+
+        $scope.metaTags = [{key: '', value: ''}];
+
+        $scope.addNewChoice = function() {
+            $scope.metaTags.push({key: '', value: ''});
         };
-            
-        }
-        this.groups = data['groups'];
-        this.documents = data['documents']
-    
-        HomeData.addData(data);
+
+        // Remove key/value pair.
+        $scope.removeChoice = function() {
+            // Only remove
+            if($scope.metaTags.length-1 >= 1)
+            {
+                var lastItem = $scope.metaTags.length-1;
+                $scope.metaTags.splice(lastItem);
+            }
+        };
 
     }
 
