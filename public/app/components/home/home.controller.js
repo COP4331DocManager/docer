@@ -38,6 +38,10 @@
                 {
                   "id": 2,
                   "name": "Asshole"
+                },
+                 {
+                  "id": 3,
+                  "name": "<b>Asshole</b>"
                 }
               ] 
                 },
