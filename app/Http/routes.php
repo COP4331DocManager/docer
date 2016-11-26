@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return response()->json(['welcome']);
+    return File::get(public_path() . '/index.html');
 });
 
 Route::group(['prefix' => 'api'], function()
