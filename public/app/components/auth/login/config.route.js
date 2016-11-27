@@ -11,7 +11,7 @@
     $routeProvider.when('/login', {
 		controller: 'LoginController',
 		templateUrl: 'app/components/auth/login/loginView.html',
-		controllerAs: 'vm'
+		controllerAs: 'vm2'
   	})
   }
 })();
