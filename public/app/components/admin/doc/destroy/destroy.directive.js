@@ -4,7 +4,10 @@
     app.directive("docDestroy", function(){
         return{
             restrict: 'E',
-            templateUrl: "/app/components/admin/doc/destroy/destroyView.html"
+            scope: {show: '='},
+            templateUrl: "/app/components/admin/doc/destroy/destroyView.html",
+            controller: 'DestroyController',
+            controllerAs: "destroyCtrl"
         };
     })
 })();

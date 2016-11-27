@@ -26,10 +26,10 @@
         //   //console.log(HomeData.getGroups());
         // });
 
-        $scope.metaTags = [{key: '', value: ''}];
+        $scope.metaTags = [{name: '', value: ''}];
 
         $scope.addNewChoice = function() {
-            $scope.metaTags.push({key: '', value: ''});
+            $scope.metaTags.push({name: '', value: ''});
         };
 
         // Remove key/value pair.

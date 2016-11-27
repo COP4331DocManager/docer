@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div class="col-md-8 col-lg-8 col-sx-6>" ng-show="catCtrl.isSet(1)">
+<div class="col-md-8 col-lg-8 col-sx-6>" ng-show="show">
     <div class="panel panel-success" style="height: 460px">
         <div class="panel-heading" style="height: 460px">
             <div class="row">
@@ -7,16 +7,36 @@
                     <h1 class="page-header">Create New Document</h1>
                 </div>
             </div>
-            <div class="row">
-                <!--THIS FORM DOES NOT WORK-->
-                <form action="/api/document" method="post" enctype="multipart/form-data">
-                    Select image to upload:
-                    <input type="file" name="user_upload" id="fileToUpload" >
-
-                    <upload></upload>
-                </form>
-            </div>
+            <form name="form" ng-submit="createCtrl.create()" role="form">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <img ng-src="{{image_source}}" class="img-responsive" alt="Doc" width="460" height="345">
+                    </div>
+                    <div class="col-xs-8 col-md-8 col-lg-8">
+                        <div class="form-group">
+                            <label>Group ID:</label>
+                            <input class="form-control" placeholder="Group ID" type="text" ng-model="createCtrl.groupid" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Image:</label>
+                            <input type="file" class="form-control input-sm" accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Meta Tags:</label>
+                            <upload></upload>
+                        </div>
+                        <div class="form-group">
+                            <p>{{ metaTags }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <button type="submit" class="btn btn-success pull-right">Create Document</button>
+                        <p>{{message}}</p>
+                    </div>
+                </div>
+            </form>
         </div>
-        <button type="submit" class="btn btn-success pull-right">Create Document</button>
     </div>
 </div>

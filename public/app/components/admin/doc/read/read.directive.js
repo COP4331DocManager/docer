@@ -4,7 +4,10 @@
     app.directive("docRead", function(){
         return{
             restrict: 'E',
-            templateUrl: "/app/components/admin/doc/read/readView.html"
+            scope: {show: '='},
+            templateUrl: "/app/components/admin/doc/read/readView.html",
+            controller: 'ReadController',
+            controllerAs: "readCtrl"
         };
     })
 })();
