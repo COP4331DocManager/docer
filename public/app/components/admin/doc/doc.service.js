@@ -38,7 +38,22 @@
                 var defer = $q.defer();
                 $http.get('/api/document/' + doc_id + '/info')
                     .success(function (data) {
+                        if(data.length == 0)
+                            defer.resolve([{"group_id" : -1, "metaTags" : []}]);
+                        else
+                            defer.resolve(data);
+                    }).error(function(data){
+                        defer.resolve([{"group_id" : -1, "metaTags" : []}]);
+                    });
+                return defer.promise;
+            },
+            destroyDoc:function(doc_id){
+                var defer = $q.defer();
+                $http.delete('/api/document/' + doc_id)
+                    .success(function (data) {
                         defer.resolve(data);
+                    }).error(function(data){
+                        defer.resolve("Something gone wrong");
                     });
                 return defer.promise;
             },

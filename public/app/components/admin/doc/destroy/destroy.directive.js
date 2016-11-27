@@ -6,7 +6,7 @@
             restrict: 'E',
             scope: {show: '='},
             templateUrl: "/app/components/admin/doc/destroy/destroyView.html",
-            controller: 'DestroyController',
+            controller: 'DocDestroyController',
             controllerAs: "destroyCtrl"
         };
     })
