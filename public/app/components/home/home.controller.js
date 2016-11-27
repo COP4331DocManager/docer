@@ -30,7 +30,7 @@
               {
               "id": 1,
               "name": "memes",
-              "Members": [
+              "members": [
                 {
                   "id": 1,
                   "name": "Shitfuck"
@@ -38,13 +38,17 @@
                 {
                   "id": 2,
                   "name": "Asshole"
+                },
+                 {
+                  "id": 3,
+                  "name": "<b>Asshole</b>"
                 }
               ] 
                 },
                 {
               "id": 2,
               "name": "Trump",
-              "Members": [
+              "members": [
                 {
                   "id": 2,
                   "name": "Donkey Fucker"

@@ -4,7 +4,9 @@
     app.directive("upload", function(){
         return{
             restrict: 'E',
-            templateUrl: "/app/components/upload/uploadView.html"
+            templateUrl: "/app/components/upload/directives/uploadView.html",
+            controller: "UploadController",
+            controllerAs: "uploadCtrl"
         };
     })
 })();

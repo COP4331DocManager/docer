@@ -11,11 +11,12 @@
             </div>
             <div class="col-md-8 col-xs-8">
                 <div class="ui-menu">
-                    <ul>
-                        <li ng-repeat="user in current.group.Members">
-                            <b>Member Name:</b> {{user.name}}
-                        </li>
-                    </ul>  
+                    <md-radio-group ng-model="current.member" class="md-primary">
+            
+                        <md-radio-button ng-repeat="member in current.group.members" ng-value="member" ng-disabled=" member.isDisabled " >
+                        Member: {{ member.name }} 
+                    </md-radio-group>
+                    </div>
                 </div>
                 <br>
                 <p>

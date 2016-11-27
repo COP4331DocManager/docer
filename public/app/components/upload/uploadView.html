@@ -9,29 +9,19 @@
                     <div class="col-xs-12 col-md-12">
                         <div class="form-group">
                             <label>File input</label>
-                            <input type="file">
+                            <input type="file" name="image">
                         </div>
                     </div>
 
-                    <div class="col-lg-5 col-md-5">
-                        <input type="text" class="form-control" placeholder="First Name">
-                    </div>
-
-                    <div class="col-lg-5 col-md-5">
-                        <input type="text" class="form-control" placeholder="Tyler">
-                    </div>
-
-                    <div class="col-lg-2 col-md-2">
-                        <button type="button" class="btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                    </div>
-
                     <div class="col-xs-12 col-md-12">
-                        <button type="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                    </div>
+                        <upload></upload>
 
-                    <div class="col-xs-12 col-md-12">
-                        <button type="button" class="btn btn-success pull-right">Save</i></button>
+                        <button type="button" class="btn btn-success pull-right" ng-click="uploadSave()">Save</i></button>
                         <button type="button" class="btn btn-danger pull-right">Cancel</button>
+                    </div>
+
+                    <div id="choicesDisplay">
+                        {{ metaTags }}
                     </div>
 
                 </div>
