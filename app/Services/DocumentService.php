@@ -84,7 +84,7 @@ class DocumentService
             ]
         );
 
-        return response()->json($doc);
+        return response()->json(DocumentService::getDocuments([$doc->id]));
     }
 
     public function updateDocument($document_id)
