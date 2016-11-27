@@ -33,6 +33,7 @@ Route::group(['prefix' => 'api'], function()
 
     Route::post('document', 'DocumentController@upload');
     Route::get('document/{id}', 'DocumentController@view');
+    Route::get('document/{id}/info', 'DocumentController@info');
     Route::delete('document/{id}', 'DocumentController@delete');
     Route::post('search', 'DocumentController@search');
 
