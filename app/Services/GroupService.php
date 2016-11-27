@@ -15,11 +15,21 @@ class GroupService
     {
         $group = Group::create([
             'name' => $name,
-            'user_id' => Auth::id()
+            'created_by' => 3
         ]);
 
-
         $group->save();
+
+        DB::table('groups')->where('id', $group->id)
+            ->update(['created_by' => Auth::id()]);
+
+        DB::table('users_groups')->insert([
+            'user_id' => Auth::id(),
+            'group_id' => $group->id,
+            'is_admin' => True
+        ]);
+
+        return response()->json(GroupService::readGroup($group->id));
     }
 
     public function readGroup($group_id)
@@ -65,18 +75,22 @@ class GroupService
 
     public function isGroupAdmin($group_id)
     {
+        $sysAdmin = DB::table('users')->where(['id', Auth::id()],['isAdmin', True]);
         return DB::table('users_groups')
             ->where([['users_groups.group_id', $group_id],
                 ['users_groups.user_id', Auth::id()],
                 ['users_groups.is_admin', True]])
+            ->union($sysAdmin)
             ->count();
     }
 
      public function isMember($group_id)
     {
+        $sysAdmin = DB::table('users')->where(['id', Auth::id()],['isAdmin', True]);
         return DB::table('users_groups')
             ->where([['users_groups.group_id', $group_id],
                      ['users_groups.user_id', Auth::id()]])
+            ->union($sysAdmin)
             ->count();
     }
 

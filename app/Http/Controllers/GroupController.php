@@ -13,12 +13,13 @@ class GroupController extends Controller
 
     public function __construct()
     {
+        $this->middleware('jwt.auth');
         $this->service = app(GroupService::class);
     }
 
     public function createGroup(Request $request)
     {
-        $this->service->createGroup($request->input('name'));
+        return $this->service->createGroup($request->input('name'));
     }
 
     public function readGroup(Request $request)
