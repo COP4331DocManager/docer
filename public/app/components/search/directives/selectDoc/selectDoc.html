@@ -1,0 +1,31 @@
+<div class="hero-feature">
+    <div class="thumbnail">
+        <div class="caption">
+            <p style="display:inline">
+                <h3 class='text-center'>Current Group: {{current.group.name}}</h3>
+            </p>
+        </div>
+        <ul class="list-group">
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+            </div>
+            <div class="col-md-8 col-xs-8">
+                <div class="ui-menu">
+                    <md-radio-group ng-model="current.document" class="md-primary">
+            
+                        <md-radio-button ng-repeat="document in documents" ng-value="member" ng-disabled=" member.isDisabled " >
+                        Document: {{ Document.name }} 
+                    </md-radio-group>
+                    </div>
+                </div>
+                <br>
+                <p>
+                    <a href="#" class="btn btn-danger">
+                        Leave Group
+                    </a>
+                </p>
+            </div>
+           
+        </ul>
+    </div>
+</div>
