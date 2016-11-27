@@ -18,30 +18,33 @@ class GroupService
             'user_id' => Auth::id()
         ]);
 
+
         $group->save();
     }
 
     public function readGroup($group_id)
     {
-        // TODO
+        $group = DB::table('groups')
+            ->where('groups.id', $group_id)
+            ->first(['id', 'name']);
+        
+        $group->members = GroupService::getGroupMembers($group->id);
+
+        return $group;
     }
 
     public function updateGroup($group_id)
     {
-        // TODO
+        //
     }
 
     public function getGroupMembers($group_id)
     {
-        $users = [];
-
-        $usersGroups = DB::table('users_groups')->where('group_id', '=', $group_id)->get();
-
-        foreach($usersGroups as $user)
-        {
-            $users [] = User::find($user->user_id);
-        }
-
+		$users = DB::table('users_groups')
+                ->join('users', 'users.id', '=', 'users_groups.user_id')
+                ->where('users_groups.group_id', '=', $group_id)
+                ->select('users.id', 'users.name', 'users_groups.is_admin')
+                ->get();
 
         return $users;
     }
@@ -58,6 +61,41 @@ class GroupService
         }
 
         return $documents;
+    }
+
+    public function isGroupAdmin($group_id)
+    {
+        return DB::table('users_groups')
+            ->where([['users_groups.group_id', $group_id],
+                ['users_groups.user_id', Auth::id()],
+                ['users_groups.is_admin', True]])
+            ->count();
+    }
+
+     public function isMember($group_id)
+    {
+        return DB::table('users_groups')
+            ->where([['users_groups.group_id', $group_id],
+                     ['users_groups.user_id', Auth::id()]])
+            ->count();
+    }
+
+    public function updateGroupAdmins($group_id, $admins)
+    {
+        if(GroupServices::isGroupAdmin($group_id) != 1) {
+            return response()->json('Error: User is not an admin of group ' . $group, 403);
+        }
+        DB::table('users_groups')
+            ->where('users_groups.group_id', $group_id)
+            ->whereNotIn('users_groups.user_id', $admins)
+            ->update(['is_admin' => False]);
+
+        DB::table('users_groups')
+			->where('users_groups.group_id', $group_id)
+            ->whereIn('users_groups.user_id', $admins)
+            ->update(['is_admin' => True]);
+
+        return response()->json(GroupServices::readGroup($group_id));
     }
 
     public function destroyGroup($group_id, $user_id)

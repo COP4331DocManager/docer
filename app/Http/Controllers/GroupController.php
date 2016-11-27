@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Services\GroupService;
 use Illuminate\Http\Request;
+use Validator;
 
 class GroupController extends Controller
 {
@@ -22,36 +23,84 @@ class GroupController extends Controller
 
     public function readGroup(Request $request)
     {
-        $this->service->createGroup($request->input('group_id'));
+        $req = $request->only('group_id');
+        $validator = Validator::make($req, [
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+
+        return response()->json($this->service->readGroup($req['group_id']));
     }
 
     public function getGroupMembers(Request $request = null)
     {
-        // TODO: Change this to use $request instead of being hardcoded
-        $groupMember = app(GroupService::class)->getGroupMembers(1);
+        $req = $request->only('group_id');
+        $validator = Validator::make($req, [
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
 
-        dump($groupMember);
+        $groupMember = app(GroupService::class)->getGroupMembers($req['group_id']);
 
         return $groupMember;
     }
 
     public function getGroupDocuments(Request $request = null)
     {
-        // TODO: Change this to use $request instead of being hardcoded
-        $groupDocuments = $this->service->getGroupDocuments(1);
+        $req = $request->only('group_id');
+        $validator = Validator::make($req, [
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
 
-        dump($groupDocuments);
+        $groupDocuments = $this->service->getGroupDocuments($req['group_id']);
 
         return $groupDocuments;
     }
 
     public function updateGroup(Request $request)
     {
-        $this->service->updateGroup($request->input('group_id'));
+        $req = $request->only('group_id');
+        $validator = Validator::make($req, [
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        if(GroupServices::isGroupAdmin($req['group_id']) != 1) {
+            return response()->json('Error: User is not an admin of group ' . $req['group_id'], 403);
+        }
+        $this->service->updateGroup($req['group_id']);
+    }
+
+    public function updateGroupAdmins(Request $request)
+    {
+        $req = $request->only('group_id', 'admins');
+        $validator = Validator::make($req, [
+            'admins' => 'require',
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+       if(GroupServices::isGroupAdmin($group_id) != 1) {
+            return response()->json('Error: User is not an admin of group ' . $group, 403);
+       }
+
+       $this->service->updateGroupAdmins($req['group_id'], $req['admins']);
     }
 
     public function destroyGroup(Request $request)
     {
+        if(GroupServices::isGroupAdmin($group_id) != 1) {
+            return response()->json('Error: User is not an admin of group ' . $group, 403);
+        }
         $this->service->destroyGroup($request->input('group_id'));
     }
 

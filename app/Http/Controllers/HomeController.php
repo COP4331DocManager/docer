@@ -26,6 +26,5 @@ class HomeController extends Controller
     public function index()
     {
         return app(HomeService::class)->getUser();
-        return response()->json(["OK"]);
     }
 }
