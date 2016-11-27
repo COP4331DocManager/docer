@@ -13,19 +13,12 @@
                 <div class="ui-menu">
                     <md-radio-group ng-model="current.document" class="md-primary">
             
-                        <md-radio-button ng-repeat="document in documents" ng-value="member" ng-disabled=" member.isDisabled " >
-                        Document: {{ Document.name }} 
+                        <md-radio-button ng-repeat="document in documents" ng-value="member" ng-disabled=" member.isDisabled "></md-radio-button>
+                        Document: {{ Document.name }}
                     </md-radio-group>
                     </div>
                 </div>
-                <br>
-                <p>
-                    <a href="#" class="btn btn-danger">
-                        Leave Group
-                    </a>
-                </p>
             </div>
-           
         </ul>
     </div>
 </div>

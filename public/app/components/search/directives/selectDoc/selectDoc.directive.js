@@ -25,8 +25,8 @@
 		return{
 			restrict: 'E',
 			templateUrl: "/app/components/group/directives/currentGroup/currentGroupView.html",
-            controller: "SearchController",
-            controllerAs: 'searchCtrl'
+            // controller: "SearchController",
+            // controllerAs: 'searchCtrl'
 		};
 	});
 
