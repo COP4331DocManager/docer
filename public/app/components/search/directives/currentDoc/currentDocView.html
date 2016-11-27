@@ -5,10 +5,11 @@
                 <h3>Document MetaData</h3>
                 <div class="list-group">
                     <div class="ui-menu" style="display: block; overflow-y: auto; height: 400px;">
-                    <md-radio-group ng-model="current.group" class="md-primary">
-            
-                        <md-radio-button ng-repeat="meta in current.slide.metaTags" ng-value="group" ng-disabled=" group.isDisabled " >
-                        Meta: {{ document.name }}
+                        <md-radio-group ng-model="current.group" class="md-primary">
+
+                            <md-radio-button ng-repeat="meta in current.slide.metaTags" ng-value="group" ng-disabled=" group.isDisabled " ></md-radio-button>
+                            Meta: {{ document.name }}
+                        </md-radio-group>
                     </div>
                 </div>
             </div>

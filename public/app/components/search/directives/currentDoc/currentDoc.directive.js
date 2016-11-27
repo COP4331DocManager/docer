@@ -8,7 +8,7 @@
 			restrict: 'E',
 			templateUrl: "/app/components/search/directives/currentDoc/currentDocView.html",
             controller: "SearchController",
-            controllerAs:"vm"
+            controllerAs:"searchCtrl"
 		};
 	});
 

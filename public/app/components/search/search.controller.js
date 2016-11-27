@@ -5,12 +5,10 @@
 
     app.controller('SearchController',SearchController );
 
-    SearchController.$inject = ['$scope', 'HomeData'];
-    function GroupController($scope, HomeData){
+    SearchController.$inject = ['$scope', 'Restangular', 'HomeInfo', 'HomeData'];
+
+    function SearchController($scope){
         console.log("Useless right now")   
     }
-      
-  
-
 
 })();
