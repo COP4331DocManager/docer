@@ -13,7 +13,7 @@
 	  	"ngCookies",
 	  	'restangular',
 	  	"ngMaterial",
-
+        'angular-carousel',
 
       	/*custom*/
 		'app.nav',

@@ -262,3 +262,21 @@ li {
 .panel-light-blue>a:hover {
     color: #4aa4bf
 }
+
+
+/* For carousel */
+ul[rn-carousel] {
+    width:600px;
+    height:400px;
+    margin: 0 auto;
+}
+
+.bgimage {
+    text-align:right;
+    color:white;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position: center center;
+}
+/* end for carousel */
