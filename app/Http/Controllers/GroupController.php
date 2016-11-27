@@ -31,6 +31,9 @@ class GroupController extends Controller
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
+        if($this->service->isMember($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
+        }
 
         return response()->json($this->service->readGroup($req['group_id']));
     }
@@ -43,6 +46,9 @@ class GroupController extends Controller
         ]);
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
+        }
+        if($this->service->isMember($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
         }
 
         $groupMember = app(GroupService::class)->getGroupMembers($req['group_id']);
@@ -59,6 +65,9 @@ class GroupController extends Controller
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
+        if($this->service->isMember($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
+        }
 
         $groupDocuments = $this->service->getGroupDocuments($req['group_id']);
 
@@ -74,9 +83,10 @@ class GroupController extends Controller
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
-        if(GroupServices::isGroupAdmin($req['group_id']) != 1) {
-            return response()->json('Error: User is not an admin of group ' . $req['group_id'], 403);
+        if($this->service->isGroupAdmin($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
         }
+
         $this->service->updateGroup($req['group_id']);
     }
 
@@ -90,17 +100,17 @@ class GroupController extends Controller
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
-       if(GroupServices::isGroupAdmin($group_id) != 1) {
-            return response()->json('Error: User is not an admin of group ' . $group, 403);
-       }
+        if($this->service->isGroupAdmin($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
+        }
 
        $this->service->updateGroupAdmins($req['group_id'], $req['admins']);
     }
 
     public function destroyGroup(Request $request)
     {
-        if(GroupServices::isGroupAdmin($group_id) != 1) {
-            return response()->json('Error: User is not an admin of group ' . $group, 403);
+        if($this->service->isGroupAdmin($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
         }
         $this->service->destroyGroup($request->input('group_id'));
     }

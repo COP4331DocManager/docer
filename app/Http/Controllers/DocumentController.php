@@ -40,7 +40,7 @@ class DocumentController extends Controller
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
-        if($this->groups->isMember($req['group']) != 1) {
+        if($this->groups->isMember($req['group']) != True) {
             return response()->json('Error: User is not a member of group ' . $req['group'], 403);
         }
         return $this->service->createDocument(

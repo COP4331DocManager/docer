@@ -6,6 +6,7 @@ use App\Document;
 use App\Group;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+#use Auth;
 use Illuminate\Support\Facades\DB;
 
 class GroupService
@@ -75,28 +76,29 @@ class GroupService
 
     public function isGroupAdmin($group_id)
     {
-        $sysAdmin = DB::table('users')->where(['id', Auth::id()],['isAdmin', True]);
-        return DB::table('users_groups')
+        $sysAdmin = DB::table('users')->where([['id', Auth::id()],['isAdmin', True]])->count();
+        $admin = DB::table('users_groups')
             ->where([['users_groups.group_id', $group_id],
                 ['users_groups.user_id', Auth::id()],
                 ['users_groups.is_admin', True]])
-            ->union($sysAdmin)
-            ->count();
+                ->count();
+        return ($sysAdmin + $admin) > 0;
     }
 
      public function isMember($group_id)
     {
-        $sysAdmin = DB::table('users')->where(['id', Auth::id()],['isAdmin', True]);
-        return DB::table('users_groups')
+        $sysAdmin = DB::table('users')->where([['id', Auth::id()],['isAdmin', True]])->count();
+
+        $admin = DB::table('users_groups')
             ->where([['users_groups.group_id', $group_id],
                      ['users_groups.user_id', Auth::id()]])
-            ->union($sysAdmin)
             ->count();
+        return ($sysAdmin + $admin) > 0;
     }
 
     public function updateGroupAdmins($group_id, $admins)
     {
-        if(GroupServices::isGroupAdmin($group_id) != 1) {
+        if(GroupServices::isGroupAdmin($group_id) != True) {
             return response()->json('Error: User is not an admin of group ' . $group, 403);
         }
         DB::table('users_groups')
