@@ -7,10 +7,10 @@
 
     app.controller('UploadController', UploadController);
 
-    UploadController.$inject = ['$rootScope', '$scope', 'Restangular'];
+    UploadController.$inject = ['$rootScope', '$scope', 'Restangular', '$http'];
 
 
-    function UploadController($rootScope, $scope, Restangular){
+    function UploadController($rootScope, $scope, Restangular, $http){
 
         //https://stackoverflow.com/questions/37042775/file-upload-with-other-data-in-angularjs-with-laravel
         //  Restangular.all('test').getList().then(function(response) {
@@ -41,20 +41,41 @@
                 $scope.metaTags.splice(lastItem);
             }
         };
-
-        $scope.uploadFile = function () {
-            var f = document.getElementById('file').files[0],
-              r = new FileReader();
-            r.onloadend = function(e){
-                var data = e.target.result;
-                var upload = Restangular.all('document');
-               upload.post(data);
-                //send your binary data via $http or $resource or do anything else with it
-
-            }
-            r.readAsBinaryString(f);
         
-        };
+        $scope.uploadDocument = function() {
+            $http({
+                method  : 'POST',
+                url     : '/api/document',
+                processData: false,
+                transformRequest: function (data) {
+                    var formData = new FormData();
+                    formData.append("user_upload", $scope.currentFile);  
+                    formData.append("group", 1);
+                    formData.append("metaTags", $scope.metaTags);
+                    return formData;  
+                },  
+                headers: {
+                    'Content-Type': undefined
+                }
+            }).success(function(data){
+                alert("Success");
+            }).error(function(data){
+                alert("Something gone wrong");
+            });
+        }
+
+        $scope.uploadedFile = function(element) {
+            $scope.currentFile = element.files[0];
+            var reader = new FileReader();
+            
+            reader.onload = function(event) {
+                $scope.image_source = event.target.result
+                $scope.$apply(function($scope) {
+                    $scope.files = element.files;
+                });
+            }
+            reader.readAsDataURL(element.files[0]);
+        }
 
     }
 
