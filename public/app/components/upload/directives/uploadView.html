@@ -7,11 +7,11 @@
         <input type="text" class="form-control" ng-model="tag.value" placeholder="Value">
     </div>
 
-    <div class="col-lg-2 col-md-2" ng-show="$last" ng-click="removeChoice()">
-        <button type="button" class="btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></button>
+    <div class="col-lg-2 col-md-2">
+        <button type="button" class="btn btn-danger" ng-show="$last" ng-click="removeChoice()"><i class="fa fa-minus" aria-hidden="true"></i></button>
     </div>
 
-    <div class="col-xs-12 col-md-12" ng-show="$last" ng-click="addNewChoice()">
-        <button type="button" class="btn btn-default"><i class="fa fa-plus" aria-hidden="true"></i></button>
+    <div class="col-xs-12 col-md-12">
+        <button type="button" class="btn btn-default" ng-show="$last" ng-click="addNewChoice()"><i class="fa fa-plus" aria-hidden="true"></i></button>
     </div>
 </fieldset>
