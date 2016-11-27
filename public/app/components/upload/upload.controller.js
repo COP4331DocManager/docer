@@ -33,12 +33,16 @@
 
         // Remove key/value pair.
         $scope.removeChoice = function() {
-            // Only remove
+            // Only remove if there are more than 1.
             if($scope.metaTags.length-1 >= 1)
             {
                 var lastItem = $scope.metaTags.length-1;
                 $scope.metaTags.splice(lastItem);
             }
+        };
+
+        $scope.uploadFile = function () {
+
         };
 
     }
