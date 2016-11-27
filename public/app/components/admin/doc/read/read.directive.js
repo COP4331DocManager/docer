@@ -6,7 +6,7 @@
             restrict: 'E',
             scope: {show: '='},
             templateUrl: "/app/components/admin/doc/read/readView.html",
-            controller: 'ReadController',
+            controller: 'DocReadController',
             controllerAs: "readCtrl"
         };
     })

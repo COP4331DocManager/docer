@@ -12,6 +12,7 @@
                                       this.groupid, 
                                       $scope.metaTags).then(function(data){
                 $scope.message = data;
+                alert(data);
             });
         };
         

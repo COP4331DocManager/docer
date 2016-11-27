@@ -34,6 +34,14 @@
                     
                 return defer.promise;
             },
+            readDoc:function(doc_id){
+                var defer = $q.defer();
+                $http.get('/api/document/' + doc_id + '/info')
+                    .success(function (data) {
+                        defer.resolve(data);
+                    });
+                return defer.promise;
+            },
         }
     }
 })();

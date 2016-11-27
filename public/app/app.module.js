@@ -14,6 +14,7 @@
 	  	'restangular',
 	  	"ngMaterial",
         'angular-carousel',
+        'angular.img',
 
       	/*custom*/
 		'app.nav',
