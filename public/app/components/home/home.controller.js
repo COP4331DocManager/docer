@@ -18,9 +18,6 @@
 
 
         HomeInfo.getData().then(function(data){
-          console.log(data);
-          var stuff = data;
-          console.log(stuff)
           //HomeData.addData(data.groups);
           //console.log(HomeData.getGroups());
         });
