@@ -140,7 +140,7 @@ class DocumentService
         return $response;
     }
 
-    public function destroyDocument($document_id, $user)
+    public function destroyDocument($document_id)
     {
         $doc = DB::table('documents')
             ->where('documents.id', $document_id)
@@ -150,6 +150,7 @@ class DocumentService
         }
 
         DB::table('document_meta_tags')->where('document_id', '=', $doc->id)->delete();
+        DB::table('documents_groups')->where('document_id', '=', $doc->id)->delete();
         DB::table('documents')->where('id', '=', $doc->id)->delete();
 
         if(DB::table('documents')->where('path', '=', $doc->path)->count() == 0) {

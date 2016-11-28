@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 #use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Services\DocumentService;
 
 class GroupService
 {
@@ -114,9 +115,15 @@ class GroupService
         return response()->json(GroupServices::readGroup($group_id));
     }
 
-    public function destroyGroup($group_id, $user_id)
+    public function destroyGroup($group_id)
     {
-        // TODO
+        $Doc = app(DocumentService::class);
+        $IDs = DB::table('documents')->where('group_id', $group_id)->select('id')->get();
+        foreach($IDs as $ID) {
+            $Doc->DestroyDocument($ID->id);
+        }
+        DB::table('users_groups')->where('group_id', $group_id)->delete();
+        DB::table('groups')->where('id', $group_id)->delete();
     }
 
 }

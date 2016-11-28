@@ -109,10 +109,19 @@ class GroupController extends Controller
 
     public function destroyGroup(Request $request)
     {
+        $req = $request->only('group_id');
+        $validator = Validator::make($req, [
+            'admins' => 'require',
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
         if($this->service->isGroupAdmin($req['group_id']) != True) {
             return response()->json('Error: User is not authorized', 403);
         }
-        $this->service->destroyGroup($request->input('group_id'));
+        $this->service->destroyGroup($req['group_id']);
+        return response()->json('Group Destroyed');
     }
 
 }
