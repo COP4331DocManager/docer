@@ -56,9 +56,7 @@ class DocumentController extends Controller
         if($this->service->hasDocAccess($id, True) != True) {
             return response()->json("Error: User is not authorized", 403);
         }
-        return $this->service->destroyDocument(
-            $id,
-            $request->user());
+        return $this->service->destroyDocument($id);
     }
 
     public function view(Request $request, $id)

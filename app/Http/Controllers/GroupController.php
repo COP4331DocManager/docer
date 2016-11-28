@@ -74,11 +74,12 @@ class GroupController extends Controller
         return $groupDocuments;
     }
 
-    public function updateGroup(Request $request)
+    public function addMember(Request $request)
     {
-        $req = $request->only('group_id');
+        $req = $request->only('group_id', 'user');
         $validator = Validator::make($req, [
-            'group_id' => 'required|integer'
+            'group_id' => 'required|integer',
+            'user' => 'required|string'
         ]);
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
@@ -87,7 +88,24 @@ class GroupController extends Controller
             return response()->json('Error: User is not authorized', 403);
         }
 
-        $this->service->updateGroup($req['group_id']);
+        return $this->service->addMember($req['group_id'], $req['user']);
+    }
+
+    public function deleteMember(Request $request)
+    {
+        $req = $request->only('group_id', 'user_id');
+        $validator = Validator::make($req, [
+            'group_id' => 'required|integer',
+            'user_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        if($this->service->isGroupAdmin($req['group_id']) != True) {
+            return response()->json('Error: User is not authorized', 403);
+        }
+
+        return $this->service->deleteMember($req['group_id'], $req['user_id']);
     }
 
     public function updateGroupAdmins(Request $request)
@@ -104,15 +122,24 @@ class GroupController extends Controller
             return response()->json('Error: User is not authorized', 403);
         }
 
-       $this->service->updateGroupAdmins($req['group_id'], $req['admins']);
+       return $this->service->updateGroupAdmins($req['group_id'], $req['admins']);
     }
 
     public function destroyGroup(Request $request)
     {
+        $req = $request->only('group_id');
+        $validator = Validator::make($req, [
+            'admins' => 'require',
+            'group_id' => 'required|integer'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
         if($this->service->isGroupAdmin($req['group_id']) != True) {
             return response()->json('Error: User is not authorized', 403);
         }
-        $this->service->destroyGroup($request->input('group_id'));
+        $this->service->destroyGroup($req['group_id']);
+        return response()->json('Group Destroyed');
     }
 
 }

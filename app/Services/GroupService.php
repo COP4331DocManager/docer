@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 #use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Services\DocumentService;
 
 class GroupService
 {
@@ -44,9 +45,31 @@ class GroupService
         return $group;
     }
 
-    public function updateGroup($group_id)
+    public function addMember($group_id, $user)
     {
-        //
+        $userID = DB::table('users')
+            ->orWhere('name', '=',  $user)
+            ->orWhere('email', '=',  $user)
+            ->value('id');
+        if(is_null($userID)) {
+            return response()->json('User not found', 406);
+        }
+        DB::table('users_groups')->insert([
+            'user_id' => $userID,
+            'group_id' => $group_id
+        ]);
+        return response()->json(GroupService::readGroup($group_id));
+    }
+
+    public function deleteMember($group_id, $user_id)
+    {
+        DB::table('users_groups')
+            ->where([
+                ['group_id', '=', $group_id],
+                ['user_id', '=', $user_id]
+            ])
+            ->delete();
+        return response()->json(GroupService::readGroup($group_id));
     }
 
     public function getGroupMembers($group_id)
@@ -114,9 +137,15 @@ class GroupService
         return response()->json(GroupServices::readGroup($group_id));
     }
 
-    public function destroyGroup($group_id, $user_id)
+    public function destroyGroup($group_id)
     {
-        // TODO
+        $Doc = app(DocumentService::class);
+        $IDs = DB::table('documents')->where('group_id', $group_id)->select('id')->get();
+        foreach($IDs as $ID) {
+            $Doc->DestroyDocument($ID->id);
+        }
+        DB::table('users_groups')->where('group_id', $group_id)->delete();
+        DB::table('groups')->where('id', $group_id)->delete();
     }
 
 }

@@ -62,8 +62,9 @@ Route::group(['prefix' => 'api'], function()
     Route::get('/read-group', 'GroupController@readGroup');
     Route::get('/get-group-members', 'GroupController@getGroupMembers');
     Route::get('/get-group-documents', 'GroupController@getGroupDocuments');
-    Route::post('/update-group', 'DocumentController@updateGroup');
-    Route::post('/destroy-group', 'DocumentController@destroyGroup');
+    Route::post('/add-member', 'GroupController@addMember');
+    Route::post('/delete-member', 'GroupController@deleteMember');
+    Route::post('/destroy-group', 'GroupController@destroyGroup');
 
 });
 
