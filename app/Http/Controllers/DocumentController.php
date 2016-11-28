@@ -32,11 +32,11 @@ class DocumentController extends Controller
 
     public function upload(Request $request)
     {
-        $req = $request->only('user_upload', 'group', 'filename', 'tags');
+        $req = $request->only('user_upload', 'group', 'filename', 'metaTags');
         $validator = Validator::make($req, [
             'user_upload' => 'required|file',
             'group' => 'required|integer',
-            'tags' => 'present|json'
+            'metaTags' => 'present|json'
         ]);
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
@@ -48,7 +48,7 @@ class DocumentController extends Controller
         return $this->service->createDocument(
             $req['user_upload'],
             $req['group'],
-            json_decode($req['tags']));
+            json_decode($req['metaTags']));
     }
 
     public function delete(Request $request, $id)
@@ -86,5 +86,23 @@ class DocumentController extends Controller
         return $this->service->searchDocument(
             $request->input('str'), 
             $request->user());
+    }
+
+    public function update(Request $request, $id)
+    {
+        $req = $request->only('metaTags');
+        $validator = Validator::make($req, [
+            'metaTags' => 'required|json'
+        ]);
+        if($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+        if($this->service->hasDocAccess($id) != True) {
+            return response()->json("Error: User is not authorized", 403);
+        }
+
+        return $this->service->updateDocument(
+            $id,
+            json_decode($req['metaTags']));
     }
 }

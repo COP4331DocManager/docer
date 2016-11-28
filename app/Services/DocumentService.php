@@ -95,9 +95,10 @@ class DocumentService
         return response()->json(DocumentService::getDocuments([$doc->id]));
     }
 
-    public function updaueDocument($document_id)
+    public function updateDocument($document_id, $tags)
     {
-
+        DocumentService::syncTags($document_id, $tags);
+        return response()->json(DocumentService::getDocuments([$document_id]));
     }
 
     public function hasDocAccess($document_id)
