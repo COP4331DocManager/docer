@@ -30,7 +30,37 @@ class DocumentService
         return $docs;
     }
 
-    public function createDocument($file, $group, $user)
+    private function syncTags($docID, $tags) {
+        $keys = [];
+        foreach($tags as $tag) {
+            $keys[$tag->name] = -1;
+        }
+        $dbRet = DB::table('meta_tags')
+            ->whereIn('name', array_keys($keys))
+            ->select('name', 'id')->get();
+
+        foreach($dbRet as $keyID) {
+            $keys[$keyID->name] = $keyID->id;
+        }
+        foreach($keys as $key => $value) {
+            if($value == -1) {
+                $keys[$key] = DB::table('meta_tags')->insertGetId( ['name' => $key]);
+            }
+        }
+
+        foreach($tags as &$tag) {
+            $tag->document_id = $docID;
+            $tag->meta_tag_id = $keys[$tag->name];
+            unset($tag->name);
+            $tag = (array)$tag;
+        }
+
+        DB::table('document_meta_tags')->where('document_id', $docID)->delete();
+        DB::table('document_meta_tags')->insert($tags);
+
+    }
+
+    public function createDocument($file, $group, $tags)
     {
         $filePath = $file->getRealPath();
 
@@ -50,7 +80,7 @@ class DocumentService
         $doc = new App\Document(
             [
                 'path' => $finalPath,
-                'user_id' => $user['id'],
+                'user_id' => Auth::id(),
                 'group_id' => (int)$group,
                 'mime_type' => 'image/jpeg'
             ]
@@ -58,18 +88,8 @@ class DocumentService
 
         $doc->save();
 
-        $nameID = DB::table('meta_tags')->where('name', 'name')->value('id');
-        if(is_null($nameID)) {
-            $nameID = DB::table('meta_tags')->insertGetId( ['name' => 'name']);
-        }
         $origFileName = $file->getClientOriginalName();
-        DB::table('document_meta_tags')->insert(
-            [
-            'document_id' => $doc->id,
-                'meta_tag_id' => $nameID,
-                'value' => $origFileName
-            ]
-        );
+        DocumentService::syncTags($doc->id, [(object)['name' => 'name','value' => $origFileName]]);
 
         return response()->json(DocumentService::getDocuments([$doc->id]));
     }
