@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Zero Cool', 'email' => 'zerocool@hacker.com', 'password' => Hash::make('password')],
                 ['name' => 'Seg Fault', 'email' => 'seg@fault.com', 'password' => Hash::make('password')],
                 ['name' => 'Tom Cruise', 'email' => 'tomcruise@meh.com', 'password' => Hash::make('password')],
+		['name' => 'a', 'email' => 'a@a.a', 'password' => Hash::make('password'), 'isAdmin' => True],
+		['name' => 'b', 'email' => 'b@b.b', 'password' => Hash::make('password'), 'isAdmin' => False],
         );
 
         // Loop through each user above and create the record for them in the database
@@ -100,6 +102,7 @@ class DatabaseSeeder extends Seeder
             ['user_id' => 1, 'group_id' => 1],
             ['user_id' => 2, 'group_id' => 2],
             ['user_id' => 3, 'group_id' => 2],
+            ['user_id' => 5, 'group_id' => 1],
         ]);
         dump('Seeded users_groups');
 
