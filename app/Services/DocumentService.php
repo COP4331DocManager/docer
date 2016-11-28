@@ -89,12 +89,13 @@ class DocumentService
         $doc->save();
 
         $origFileName = $file->getClientOriginalName();
-        DocumentService::syncTags($doc->id, [(object)['name' => 'name','value' => $origFileName]]);
+        $tags []= (object)['name' => 'name','value' => $origFileName];
+        DocumentService::syncTags($doc->id, $tags);
 
         return response()->json(DocumentService::getDocuments([$doc->id]));
     }
 
-    public function updateDocument($document_id)
+    public function updaueDocument($document_id)
     {
 
     }

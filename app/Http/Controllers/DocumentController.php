@@ -32,10 +32,11 @@ class DocumentController extends Controller
 
     public function upload(Request $request)
     {
-        $req = $request->only('user_upload', 'group', 'filename');
+        $req = $request->only('user_upload', 'group', 'filename', 'tags');
         $validator = Validator::make($req, [
-            'user_upload' => 'required',
-            'group' => 'required|integer'
+            'user_upload' => 'required|file',
+            'group' => 'required|integer',
+            'tags' => 'present|json'
         ]);
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
@@ -43,10 +44,11 @@ class DocumentController extends Controller
         if($this->groups->isMember($req['group']) != True) {
             return response()->json('Error: User is not a member of group ' . $req['group'], 403);
         }
+
         return $this->service->createDocument(
             $req['user_upload'],
             $req['group'],
-            $request->user());
+            json_decode($req['tags']));
     }
 
     public function delete(Request $request, $id)
