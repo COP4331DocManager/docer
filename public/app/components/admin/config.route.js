@@ -6,7 +6,8 @@
 
     function configFunction($routeProvider) {
         $routeProvider.when('/admin', {
-            templateUrl: 'app/components/admin/adminPanel.html'
+            templateUrl: 'app/components/admin/adminPanel.html',
+            controller: 'AdminPannelController'
     });
     }
 
