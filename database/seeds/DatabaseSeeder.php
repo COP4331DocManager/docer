@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Zero Cool', 'email' => 'zerocool@hacker.com', 'password' => Hash::make('password')],
                 ['name' => 'Seg Fault', 'email' => 'seg@fault.com', 'password' => Hash::make('password')],
                 ['name' => 'Tom Cruise', 'email' => 'tomcruise@meh.com', 'password' => Hash::make('password')],
-		['name' => 'a', 'email' => 'a@a.a', 'password' => Hash::make('password'), 'isAdmin' => True],
-		['name' => 'b', 'email' => 'b@b.b', 'password' => Hash::make('password'), 'isAdmin' => False],
+                ['name' => 'a', 'email' => 'a@a.a', 'password' => Hash::make('password'), 'isAdmin' => True],
+                ['name' => 'b', 'email' => 'b@b.b', 'password' => Hash::make('password'), 'isAdmin' => False],
         );
 
         // Loop through each user above and create the record for them in the database
@@ -64,10 +64,10 @@ class DatabaseSeeder extends Seeder
         DB::table('documents')->delete();
 
         $documents = array(
-            ['path' => '/something/at/something', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'something'],
-            ['path' => '/something/at/something', 'user_id' => 2, 'group_id' => 1, 'mime_type' => 'something'],
-            ['path' => '/something/at/something', 'user_id' => 3, 'group_id' => 1, 'mime_type' => 'something'],
-            ['path' => '/something/at/something', 'user_id' => 4, 'group_id' => 1, 'mime_type' => 'something'],
+            ['path' => '/1/9ce95aa5dbd5f16f4126ac3fc848c9f5.jpg', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'something'],
+            ['path' => '/1/e1610b00cf12a6533654289208b21ac8.jpg', 'user_id' => 2, 'group_id' => 1, 'mime_type' => 'something'],
+            ['path' => '/1/e1610b00cf12a6533654289208b21ac8.jpg', 'user_id' => 3, 'group_id' => 1, 'mime_type' => 'something'],
+            ['path' => '/1/e872e6d34e490ee3a88534717603d23d.jpg', 'user_id' => 4, 'group_id' => 1, 'mime_type' => 'something'],
         );
 
         // Loop through each user above and create the record for them in the database
