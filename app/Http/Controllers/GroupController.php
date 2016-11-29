@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Services\GroupService;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -93,19 +94,30 @@ class GroupController extends Controller
 
     public function deleteMember(Request $request)
     {
-        $req = $request->only('group_id', 'user_id');
-        $validator = Validator::make($req, [
-            'group_id' => 'required|integer',
-            'user_id' => 'required|integer'
-        ]);
+        $input = $request->input();
+        if(isset($request->input()['self'])){
+            $input['user_id'] = Auth::id();
+            $req = $request->only('group_id');
+            $validator = Validator::make($req, [
+                'group_id' => 'required|integer'
+            ]);
+        }
+        else {
+            $req = $request->only('group_id', 'user_id');
+            $validator = Validator::make($req, [
+                'group_id' => 'required|integer',
+                'user_id' => 'required|integer'
+            ]);
+        }
+
         if($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
         if($this->service->isGroupAdmin($req['group_id']) != True) {
             return response()->json('Error: User is not authorized', 403);
-        }
+        };
 
-        return $this->service->deleteMember($req['group_id'], $req['user_id']);
+        return $this->service->deleteMember($input['group_id'], $input['user_id']);
     }
 
     public function updateGroupAdmins(Request $request)

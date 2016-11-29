@@ -65,6 +65,7 @@ Route::group(['prefix' => 'api'], function()
     Route::post('/add-member', 'GroupController@addMember');
     Route::post('/delete-member', 'GroupController@deleteMember');
     Route::post('/destroy-group', 'GroupController@destroyGroup');
+    Route::post('/promote-member', 'GroupController@updateGroupAdmins');
 
 });
 
