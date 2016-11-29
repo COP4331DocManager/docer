@@ -64,10 +64,19 @@ class DatabaseSeeder extends Seeder
         DB::table('documents')->delete();
 
         $documents = array(
-            ['path' => '/1/9ce95aa5dbd5f16f4126ac3fc848c9f5.jpg', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'something'],
-            ['path' => '/1/e1610b00cf12a6533654289208b21ac8.jpg', 'user_id' => 2, 'group_id' => 1, 'mime_type' => 'something'],
-            ['path' => '/1/e1610b00cf12a6533654289208b21ac8.jpg', 'user_id' => 3, 'group_id' => 1, 'mime_type' => 'something'],
-            ['path' => '/1/e872e6d34e490ee3a88534717603d23d.jpg', 'user_id' => 4, 'group_id' => 1, 'mime_type' => 'something'],
+            ['path' => '/1/9ce95aa5dbd5f16f4126ac3fc848c9f5.jpg', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/e1610b00cf12a6533654289208b21ac8.jpg', 'user_id' => 2, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/e1610b00cf12a6533654289208b21ac8.jpg', 'user_id' => 3, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/e872e6d34e490ee3a88534717603d23d.jpg', 'user_id' => 4, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/8c3c5597c456075a76bc93988ff2eebb.jpg', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/e67c20c94d59295fc929b10b6a4ab246.jpg', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/1b32dd53d34df288ea4bd162e99188c4.jpg', 'user_id' => 1, 'group_id' => 1, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/e67c20c94d59295fc929b10b6a4ab246.jpg', 'user_id' => 1, 'group_id' => 2, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/dfaef229f973f458510d589a90cb086b.jpg', 'user_id' => 1, 'group_id' => 2, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/8c3c5597c456075a76bc93988ff2eebb.jpg', 'user_id' => 1, 'group_id' => 2, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/907789e8895d263160655d82442198ba.jpg', 'user_id' => 1, 'group_id' => 2, 'mime_type' => 'image/jpeg'],
+            ['path' => '/1/2d55d99856abd616d19c6403c7a5959d.jpg', 'user_id' => 1, 'group_id' => 2, 'mime_type' => 'image/jpeg'],
+
         );
 
         // Loop through each user above and create the record for them in the database
