@@ -116,7 +116,7 @@ class GroupController extends Controller
         if($this->service->isGroupAdmin($req['group_id']) != True) {
             return response()->json('Error: User is not authorized', 403);
         };
-        dump($input);
+
         return $this->service->deleteMember($input['group_id'], $input['user_id']);
     }
 
