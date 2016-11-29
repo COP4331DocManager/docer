@@ -31,7 +31,8 @@ class HomeService
         }
 
 		$tmp = DB::table('documents')
-            ->where('documents.user_id', Auth::id())
+            ->join('users_groups', 'documents.group_id', '=', 'users_groups.group_id')
+            ->where('users_groups.user_id', Auth::id())
             ->select('documents.id as document_id')
             ->get();
 
