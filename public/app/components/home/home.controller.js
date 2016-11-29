@@ -14,12 +14,10 @@
                 $scope.data = data;
                 $scope.slides = data['documents'];
                    $scope.getSlide = function(slideIndex){
-                            console.log(slideIndex);
-                            console.log($scope.slides[$scope.current.slide]);
                             return $scope.slides[$scope.current.slide];
                     };
         }).error(function (data) {
-          $scope.data = "SHEEEET";
+          $scope.data = data;
         });
 
         

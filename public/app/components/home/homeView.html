@@ -1,54 +1,26 @@
 <!-- Page Content -->
-<div class="container-fluid" style="padding-top: 50px;">
-
-    <div class="row">
-        <div class="col-xs-6">
-
-<div class="carousel-demo">
-    index: <input type="number" class="tiny" ng-model="current.slide">
-    <ul rn-carousel rn-carousel-index="current.slide"  rn-carousel-pause-on-hover  rn-carousel-buffered class="carousel2" >
-        <li ng-repeat="slide in slides track by slide.document_id" ng-class="'id-' + slide.document_id">
-            <img http-src="api/document/{{slide.document_id}}" class="img-responsive" alt="Doc" width="460" height="345">
-        </li>
-    </ul>
-    <div rn-carousel-indicators ng-if="slides.length > 1" slides="slides" rn-carousel-index="current.slide">
-</div>
-</div>
-        </div>
-
-
-    
-        <div class="col-xs-6">
-            <div class="row">
-                <div class="col-xs-6 ">
-                    <div class="row">
-                        <doc-info></doc-info>
-                    </div>
-
+<div class="row">
+    <div class="col-xs-6">
+        <doc-carousel></doc-carousel>
+    </div>
+    <div class="col-xs-6">
+        <div class="row">
+            <div class="col-xs-6 ">
+                <div class="row">
+                    <doc-info></doc-info>
                 </div>
-                <div class="col-xs-6">
-        
-                    <div class="row">
-                        <div class='col-xs-12'>
-                            <group-list></group-list>
-                            <current-group></current-group>
-                        </div>
+
+            </div>
+            <div class="col-xs-6">
+    
+                <div class="row">
+                    <div class='col-xs-12'>
+                        <group-list></group-list>
+                        <current-group></current-group>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<hr>
-
-
-<!-- Footer -->
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <p>Docer Project 2016</p>
-        </div>
-    </div>
-    <!-- /.row -->
-</footer>
-
 </div>
+<hr>

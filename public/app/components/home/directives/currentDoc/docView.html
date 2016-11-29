@@ -1,26 +1,21 @@
- <div style="padding-top: 20px;">
-    <div class=" text-center">
-        <div class="hero-feature">
-            <div class="thumbnail">
-                <h3>Document MetaData</h3>
-                <div class="list-group">
-                    <md-content>
-                        <md-list >
-                            <md-list-item class="md-3-line" ng-repeat="meta in getSlide(current.slide).metaTags" >
-                     
-                                <div classs="col-xs-5">
-                                    <b>Label: </b>{{ meta.name }}
-                                </div>
-                                <div class="col-xs-5 xs-offset-1">
-                                    <b>Value: </b> {{meta.value}}
-                                </div>
-                            <md-divider></md-divider>
+<div class="hero-feature center thumbnail">
+    <h3>Document MetaData</h3>
+    <div class="ui-menu" style="display: block; overflow-y: auto; height: 400px;">
 
-                            </md-list-item>
-                        </md-list>
-                    </md-content>
-                </div>
-            </div>
-        </div>
+        <md-content>
+            <md-list md-cols="2" md-gutter="1em" md-row-height="4:3">
+
+                <md-list-item class="md-1-line" ng-repeat="meta in getSlide(current.slide).metaTags" >
+                     
+                    <div classs="col-xs-5">
+                        <b>Label: </b>{{ meta.name }}
+                    </div>
+                    <div class="col-xs-5 xs-offset-1">
+                        <b>Value: </b> {{meta.value}}
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
     </div>
 </div>

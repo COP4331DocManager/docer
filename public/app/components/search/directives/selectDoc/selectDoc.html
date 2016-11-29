@@ -2,7 +2,7 @@
     <div class="thumbnail">
         <div class="caption">
             <p style="display:inline">
-                <h3 class='text-center'>Current Group: {{current.group.name}}</h3>
+                <h3 class='text-center'>Documents</h3>
             </p>
         </div>
         <ul class="list-group">
@@ -11,12 +11,11 @@
             </div>
             <div class="col-md-8 col-xs-8">
                 <div class="ui-menu">
-                    <md-radio-group ng-model="current.document" class="md-primary">
-            
-                        <md-radio-button ng-repeat="document in documents" ng-value="member" ng-disabled=" member.isDisabled "></md-radio-button>
-                        Document: {{ Document.name }}
+                    <md-radio-group ng-model="current.slide" class="md-primary">
+                        <md-radio-button ng-repeat="document in searchResults" ng-value="document.document_id -1" ng-disabled=" member.isDisabled ">
+                            Document: {{ document.document_id }}
+                        </md-radio-button>
                     </md-radio-group>
-                    </div>
                 </div>
             </div>
         </ul>

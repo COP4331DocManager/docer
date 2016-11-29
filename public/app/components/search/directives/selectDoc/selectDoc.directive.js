@@ -21,12 +21,12 @@
 	};
     CurrentGroup.$inject = ['$scope'];
 */
- 	app.directive('searchSelectDoc', function(){
+ 	app.directive('selectDoc', function(){
 		return{
 			restrict: 'E',
-			templateUrl: "/app/components/group/directives/currentGroup/currentGroupView.html",
-            // controller: "SearchController",
-            // controllerAs: 'searchCtrl'
+			templateUrl: "/app/components/search/directives/selectDoc/selectDoc.html",
+            controller: "SearchController",
+            controllerAs: 'searchCtrl'
 		};
 	});
 

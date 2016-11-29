@@ -5,10 +5,15 @@
 
     app.controller('SearchController',SearchController );
 
-    SearchController.$inject = ['$scope', 'Restangular', 'HomeInfo', 'HomeData'];
+    SearchController.$inject = ['$scope', '$http'];
 
-    function SearchController($scope){
-        console.log("Useless right now")   
-    }
-
+    function SearchController($scope, $http){
+        $scope.current = {};
+        $scope.current.slide = 0;
+        
+        $scope.getSlide = function(slideIndex){
+            return $scope.searchResults[$scope.current.slide];
+        };
+    };
+    
 })();

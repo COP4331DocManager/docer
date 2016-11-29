@@ -1,20 +1,12 @@
- 
- 
- <div style="padding-top: 20px;">
-    <div class="text-center">
-        <div class="hero-feature">
-            <div class="thumbnail">
 
-                <h3>Your Groups</h3>
-                <div class="list-group">
-                    <div class="ui-menu" style="display: block; overflow-y: auto; height: 130px;">
-                    <md-radio-group ng-model="current.group" class="md-primary">
-            
-                        <md-radio-button ng-repeat="group in data.groups" ng-value="group" ng-disabled=" group.isDisabled " >
-                        Group: {{ group.name }}
-                    </div>
-                </div>
-            </div>
+<div class="text-center hero-feature thumbnail">
+    <h3>Your Groups</h3>
+    <div class="list-group">
+        <div class="ui-menu" style="display: block; overflow-y: auto; height: 200px;">
+        <md-radio-group ng-model="current.group" class="md-primary">
+
+            <md-radio-button ng-repeat="group in data.groups" ng-value="group" ng-disabled=" group.isDisabled " >
+            Group: {{ group.name }}
         </div>
     </div>
 </div>
