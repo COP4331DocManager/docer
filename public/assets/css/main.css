@@ -3,9 +3,14 @@
 body {
     height: 100%;
     word-wrap: normal;
-	background: ghostWhite;
+	background: #FFF;
     padding-top: 60px; /* spacing for nav bar */
 }
+
+html {
+    background-color: #FFF
+}
+
 .center{
     display: block;
     content: "";

@@ -8,8 +8,8 @@
 
     HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData'];
     function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData){
-        
-        
+
+
          Restangular.all('test').getList().then(function(response) {
             var plain = response.plain();
             $scope.slides = plain;
