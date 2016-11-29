@@ -3,22 +3,48 @@
             <div class="panel-heading" style="height: 460px">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h1 class="page-header">View Existing Document</h1>
+                        <h1 class="page-header">Update Existing Document</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
-                        <img src="assets/imgs/document1.png" class="img-responsive" alt="something" width="460" height="345">
+                        <img http-src="{{ updateCtrl.image }}" class="img-responsive" alt="Doc" width="460" height="345">
                     </div>
                     <div class="col-xs-8 col-md-8 col-lg-8">
                         <div class="row">
-
-                            <upload></upload>
+                            <div class=" col-md-6">
+                                <div class="form-group">
+                                    <label>Group ID:</label>
+                                    <p class="form-control-static" ng-bind="updateCtrl.groupid"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <form name="form" ng-submit="updateCtrl.search()" role="form">
+                                    <label>Search for a Document By ID</label>
+                                    <div class="form-group input-group">
+                                        <input type="text" name="docid" id="docid" class="form-control" ng-model="updateCtrl.docid" required>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">Search <i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <label>Meta Tags</label>
+                        <upload></upload>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <button type="button" ng-click="updateCtrl.update()" class="btn btn-warning pull-right">Update Document</button>
+                        <p>{{message}}</p>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-warning pull-right">Update Document</button>
         </div>
     </div>
 </div>
