@@ -21,6 +21,30 @@
                         var formData = new FormData();
                         formData.append("user_upload", image_file);  
                         formData.append("group", group);
+                        formData.append("metaTags", angular.toJson(meta_tags));
+                        return formData;  
+                    },  
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                }).success(function(data){
+                    defer.resolve("Success");
+                }).error(function(data){
+                    defer.resolve("Something gone wrong");
+                });
+                    
+                return defer.promise;
+            },
+            updateDoc:function(doc_id, meta_tags){
+                var defer = $q.defer();
+                //TODO: write meta tags to DB. Backend endpoint not exist yet!
+                $http({
+                    method  : 'POST',
+                    url     : '/api/document/' + doc_id + '/update',
+                    processData: false,
+                    transformRequest: function (data) {
+                        var formData = new FormData();
+                        formData.append("metaTags", angular.toJson(meta_tags));
                         return formData;  
                     },  
                     headers: {

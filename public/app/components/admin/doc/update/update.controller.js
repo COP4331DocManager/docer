@@ -1,26 +1,25 @@
 (function(){
     var app = angular.module('app.admin.doc');
 
-    app.controller("UpdateController", UpdateController);
+    app.controller("DocUpdateController", DocUpdateController);
     
-    UpdateController.$inject = ['$scope', 'AdminDocService'];
+    DocUpdateController.$inject = ['$scope', 'AdminDocService'];
 
-    function UpdateController($scope, AdminDocService){
+    function DocUpdateController($scope, AdminDocService){
+        var readCtrl = this;
         
         this.search = function() {
-            AdminDocService.readUser(this.userid).then(function(data){
-                $scope.name = data.name;
-                $scope.email = data.email;
-                $scope.create = data.created_at;
-                $scope.update = data.updated_at;
+            AdminDocService.readDoc(readCtrl.docid).then(function(data){
+                readCtrl.image = "/api/document/" + readCtrl.docid;
+                readCtrl.groupid = data[0].group_id;
+                $scope.metaTags = data[0].metaTags;
             });
         };
         
         this.update = function() {
-            console.log($scope.name);
-            console.log($scope.email);
-            AdminDocService.updateUser(this.userid, $scope.name, $scope.email).then(function(data){
+            AdminDocService.updateDoc(readCtrl.docid, $scope.metaTags).then(function(data){
                 $scope.message = data;
+                alert(data);
             });
         };
    }

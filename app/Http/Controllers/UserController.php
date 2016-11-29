@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Validator;
+use DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -14,6 +16,7 @@ class UserController extends Controller
 
     public function __construct()
     {
+        $this->middleware('jwt.auth');
         $this->service = app(UserService::class);
     }
 
@@ -44,6 +47,11 @@ class UserController extends Controller
 
     public function readUser(Request $request = null)
     {
+        $isAdmin = DB::table('users')->where('id', Auth::id())->value('isAdmin');
+        if($isAdmin != True && $request['id'] !=Auth::id()) {
+            return response()->json("Error: User is not Authorized", 403);
+        }
+
         $user = app(UserService::class)->readUser($request["id"]);
 
         //dump($user);
@@ -53,6 +61,11 @@ class UserController extends Controller
 
     public function updateUser(Request $request)
     {
+        $isAdmin = DB::table('users')->where('id', Auth::id())->value('isAdmin');
+        if($isAdmin != True && $request['id'] != Auth::id()) {
+            return response()->json("Error: User is not Authorized", 403);
+        }
+
         try
         {
             app(UserService::class)->updateUser($request["id"], $request["name"], $request["email"]);
@@ -67,6 +80,11 @@ class UserController extends Controller
 
     public function destroyUser(Request $request)
     {
+        $isAdmin = DB::table('users')->where('id', Auth::id())->value('isAdmin');
+        if($isAdmin != True) {
+            return response()->json("Error: User is not Authorized", 403);
+        }
+
         app(UserService::class)->destroyUser($request["id"]);
         return response()->json(["message"=>"User destroy successfully!"]);
     }

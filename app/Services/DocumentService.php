@@ -66,7 +66,7 @@ class DocumentService
 
         // Convert image to jpg for simplicity
         $image = new Imagick($filePath);
-        $image->setImageFormat('jpg');
+        $image->setImageFormat('jpeg');
         $image->writeImages($filePath, true);
 
         $hash = md5_file($filePath);

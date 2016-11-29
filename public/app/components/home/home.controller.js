@@ -6,100 +6,24 @@
 
     app.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData'];
-    function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData){
+    HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData','$http'];
+    function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData, $http){
 
-
-         Restangular.all('test').getList().then(function(response) {
-            var plain = response.plain();
-            $scope.slides = plain;
-            //console.log("carousel rest: ", plain);
+      $http.get('/api/home')
+            .success(function (data) {
+                $scope.data = data;
+                $scope.slides = data['documents'];
+                   $scope.getSlide = function(slideIndex){
+                            console.log(slideIndex);
+                            console.log($scope.slides[$scope.current.slide]);
+                            return $scope.slides[$scope.current.slide];
+                    };
+        }).error(function (data) {
+          $scope.data = "SHEEEET";
         });
 
+        
 
-        HomeInfo.getData().then(function(data){
-          //HomeData.addData(data.groups);
-          //console.log(HomeData.getGroups());
-        });
-        
-        var data = {
-            "groups": [
-              {
-              "id": 1,
-              "name": "memes",
-              "members": [
-                {
-                  "id": 1,
-                  "name": "Shitfuck"
-                },
-                {
-                  "id": 2,
-                  "name": "Asshole"
-                },
-                 {
-                  "id": 3,
-                  "name": "<b>Asshole</b>"
-                }
-              ] 
-                },
-                {
-              "id": 2,
-              "name": "Trump",
-              "members": [
-                {
-                  "id": 2,
-                  "name": "Donkey Fucker"
-                },
-                {
-                  "id": 3,
-                  "name": "Mountain Goat of Anal Destruction"
-                }
-              ]
-            }
-              ],
-              "documents": [
-                {
-                  "document_id": 13,
-                  "group_id": 1,
-                  "metaTags": []
-                },
-                {
-                  "document_id": 14,
-                  "group_id": 1,
-                  "metaTags": [
-                    {
-                      "name": "name",
-                      "value": "Wv8QdXY.jpg"
-                    }
-                  ]
-                },
-                {
-                  "document_id": 33,
-                  "group_id": 1,
-                  "metaTags": [
-                    {
-                      "name": "name",
-                      "value": "security-101-book-e1477949975330.jpg"
-                    }
-                  ]
-                },
-                {
-                  "document_id": 40,
-                  "group_id": 1,
-                  "metaTags": [
-                    {
-                      "name": "name",
-                      "value": "tiny_hippo.png"
-                    }
-                  ]
-                }
-              ]
-            };
-            
-            this.groups = data['groups'];
-            this.documents = data['documents']
-        
-            HomeData.addData(data);
 
     }
 

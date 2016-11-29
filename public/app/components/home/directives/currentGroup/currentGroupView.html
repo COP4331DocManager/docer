@@ -1,20 +1,18 @@
-<div class="hero-feature">
-    <div class="thumbnail">
-        <div class="caption">
-            <p style="display:inline">
-                <h3 class='text-center'>Current Group: {{current.group.name}}</h3>
-            </p>
-        </div>
-        <ul class="list-group">
-            <div class="col-md-offset-2 col-xs-offset-2 col-md-8 col-xs-8">
-                <div class="ui-menu">
-                    <ul>
-                        <li ng-repeat="user in current.group.members">
-                            <b>Member Name:</b> {{user.name}}
-                        </li>
-                    </ul>  
-                </div>
-            </div>
-        </ul>
+<div class="col-xs-12 hero-feature thumbnail">
+    <div class="caption">
+        <p style="display:inline">
+            <h3 class='text-center'>Current Group: {{current.group.name}}</h3>
+        </p>
     </div>
+    <ul class="list-group">
+        <div class="col-md-offset-2 col-xs-offset-2 col-md-8 col-xs-8">
+            <div class="ui-menu">
+                <ul>
+                    <li ng-repeat="user in current.group.members">
+                        <b>Member Name:</b> {{user.name}}
+                    </li>
+                </ul>  
+            </div>
+        </div>
+    </ul>
 </div>
