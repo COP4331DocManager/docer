@@ -7,10 +7,10 @@
 
     app.controller('UploadController', UploadController);
 
-    UploadController.$inject = ['$rootScope', '$scope', 'Restangular', '$http'];
+    UploadController.$inject = ['$rootScope', '$scope', 'Restangular', '$http', 'AdminDocService'];
 
 
-    function UploadController($rootScope, $scope, Restangular, $http){
+    function UploadController($rootScope, $scope, Restangular, $http, AdminDocService){
 
         //https://stackoverflow.com/questions/37042775/file-upload-with-other-data-in-angularjs-with-laravel
         //  Restangular.all('test').getList().then(function(response) {
@@ -43,24 +43,11 @@
         };
         
         $scope.uploadDocument = function() {
-            $http({
-                method  : 'POST',
-                url     : '/api/document',
-                processData: false,
-                transformRequest: function (data) {
-                    var formData = new FormData();
-                    formData.append("user_upload", $scope.currentFile);  
-                    formData.append("group", 1);
-                    formData.append("metaTags", $scope.metaTags);
-                    return formData;  
-                },  
-                headers: {
-                    'Content-Type': undefined
-                }
-            }).success(function(data){
-                alert("Success");
-            }).error(function(data){
-                alert("Something gone wrong");
+            AdminDocService.createDoc($scope.currentFile, 
+                                      $scope.current.group.id, 
+                                      $scope.metaTags).then(function(data){
+                $scope.doc_upload_message = data;
+                alert(data);
             });
         }
 

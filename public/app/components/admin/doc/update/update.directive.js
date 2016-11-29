@@ -6,7 +6,7 @@
             restrict: 'E',
             scope: {show: '='},
             templateUrl: "/app/components/admin/doc/update/updateView.html",
-            controller: 'UpdateController',
+            controller: 'DocUpdateController',
             controllerAs: "updateCtrl"
         };
     })
