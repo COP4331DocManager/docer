@@ -8,7 +8,7 @@
     index: <input type="number" class="tiny" ng-model="current.slide">
     <ul rn-carousel rn-carousel-index="current.slide"  rn-carousel-pause-on-hover  rn-carousel-buffered class="carousel2" >
         <li ng-repeat="slide in slides track by slide.document_id" ng-class="'id-' + slide.document_id">
-            <img http-src="api/document/{{current.slide+1}}" class="img-responsive" alt="Doc" width="460" height="345">
+            <img http-src="api/document/{{slide.document_id}}" class="img-responsive" alt="Doc" width="460" height="345">
         </li>
     </ul>
     <div rn-carousel-indicators ng-if="slides.length > 1" slides="slides" rn-carousel-index="current.slide">
