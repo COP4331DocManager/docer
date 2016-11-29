@@ -70,7 +70,7 @@ class SystemController extends Controller
     	$mem = array_merge($mem);
     	$memory_usage = $mem[2]/$mem[1]*100;
         //used, total, percent
-    	return array($mem[2], $mem[1], $memory_usage);
+    	return array($mem[2]*1024, $mem[1]*1024, $memory_usage);
     }
     
     private function get_server_cpu_usage(){
