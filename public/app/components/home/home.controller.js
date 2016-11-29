@@ -9,14 +9,11 @@
     HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData','$http'];
     function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData, $http){
         
-    var currIdx = 0;    
-   
       $http.get('/api/home')
             .success(function (data) {
                 $scope.data = data;
                 $scope.slides = data['documents'];
                    $scope.getSlide = function(slideIndex){ 
-                            currIdx = slideIndex
                             console.log(slideIndex);
                             console.log($scope.slides[$scope.current.slide]);
                             return $scope.slides[$scope.current.slide];
