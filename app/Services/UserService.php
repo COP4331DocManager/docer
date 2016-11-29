@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\User;
+use DB;
 
 class UserService
 {
@@ -46,11 +47,8 @@ class UserService
 
     public function destroyUser($user_id)
     {
-        $user = User::find($user_id);
-        if (!is_null($user))
-        {
-            $user->delete();
-        }
+        DB::table('users_groups')->where('user_id', $user_id)->delete();
+        DB::table('users')->where('id', $user_id)->delete();
     }
 
     public function getUserDocuments($user_id)
