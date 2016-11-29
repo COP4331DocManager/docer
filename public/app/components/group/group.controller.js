@@ -21,15 +21,6 @@
         $scope.showDropMemberStatusStatus = false;
         $scope.showPromoteMemberStatusStatus = false;
 
-        $http.get('/api/home')
-            .success(function (data) {
-
-                // this.groups = data['groups'];
-                // this.documents = data['documents'];
-            }).error(function (data) {
-
-        });
-
         $scope.submitCreateGroup = function () {
             if ($scope.groupName) {
                 var groupName = {name: $scope.groupName};
@@ -49,8 +40,7 @@
 
         // This leaves the user form the current group.
         $scope.submitLeaveGroup = function () {
-            // TODO: Fix this hard coded data
-            var leaveGroup = {group_id: 5, self: true};
+            var leaveGroup = {group_id: $scope.current.group.id, self: true};
             $http.post('/api/delete-member', leaveGroup)
                 .success(function (data) {
                     $scope.leaveGroupMessage = 'You have left the group';
@@ -68,10 +58,9 @@
 
         // Add member to a group
         $scope.submitAddGroupMember = function () {
-            // TODO: Fix this hard coded data
             console.log($scope.userName);
             if ($scope.userName) {
-                var addMember = {group_id: 20, user: $scope.userName};
+                var addMember = {group_id: $scope.current.group.id, user: $scope.userName};
                 $http.post('/api/add-member', addMember)
                     .success(function (data) {
                         $scope.addGroupMemberMessage = 'You have added the group member';
@@ -89,8 +78,7 @@
 
         // Drop member from a group
         $scope.submitDropGroupMember = function () {
-            // TODO: Fix this hard coded data
-            var dropMember = {group_id: 20, user_id: 3};
+            var dropMember = {group_id: $scope.current.group.id, user_id: $scope.current.member.id};
             $http.post('/api/delete-member', dropMember)
                 .success(function (data) {
                     $scope.dropGroupMemberMessage = 'You have dropped the group member';
@@ -108,8 +96,7 @@
 
         // Promote member to a group leader
         $scope.submitPromoteGroupMember = function () {
-            // TODO: Fix this hard coded data
-            var promoteMember = {group_id: 20, user_id: 3};
+            var promoteMember = {group_id: $scope.current.group.id, user_id: $scope.current.member.id};
             $http.post('/api/promote-member', promoteMember)
                 .success(function (data) {
                     $scope.promoteGroupMemberMessage = 'You have promoted the group member';
