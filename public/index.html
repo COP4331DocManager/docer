@@ -5,18 +5,15 @@
     <meta charset="utf-8">
     <title>Document Manager</title>
 
-
-    <link rel="stylesheet" href="assets/libs/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/libs/bower_components/bootstrap/dist/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="assets/libs/bower_components/angular-motion/dist/angular-motion.min.css">
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
-    
+    <link rel="stylesheet" href="assets/libs/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/libs/bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="assets/libs/bower_components/angular-motion/dist/angular-motion.min.css"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css"/>
     <link rel="stylesheet" href="assets/libs/bower_components/angular-carousel/dist/angular-carousel.css" type="text/css" />
 
-
     <!-- Fonts -->
-    <link rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/Adam/fonts.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/fonts/Adam/fonts.css"/>
 
     <!--Custom CSS-->
     <link rel="stylesheet" href="assets/css/main.css" />
@@ -24,15 +21,23 @@
 </head>
 
   <body>
-
     <navigation></navigation>
-
-
-
-    <div ng-view>
-        <home></home>
+    <div ng-view class="container-fluid" style="padding-top:50px;"></div>
+    <div class="container" style="position:fixed; bottom:0;">
+        <div class="row" >
+            <footer >
+                <div class="col-xs-12 center">
+                    <p>Docer Project 2016</p>
+                </div>
+            </footer>
+        </div>
     </div>
 
+    <!-- /.row -->
+
+
+<hr>
+<!-- Footer -->
 
 
     <!--Third-party JS-->
@@ -71,6 +76,7 @@
     <!-- Navigation -->
     <script src="app/shared/navigation/navigation.module.js"></script>
     <script src="app/shared/navigation/directives/navigation.directive.js"></script>
+    <script src="app/shared/navigation/directives/navSearch/navSearch.directive.js"></script>
 
     <!-- Home Module -->
     <script src="app/components/home/home.module.js"></script>
@@ -78,14 +84,16 @@
     <script src="app/components/home/services/home.service.js"></script>
     <script src="app/components/home/home.controller.js"></script>
     <script src="app/components/home/directives/home.directive.js"></script>
-    
-    <!--Home.Groups -->
-    <script src="app/components/home/directives/selectGroup/groups.controller.js"></script> 
-    <script src="app/components/home/directives/selectGroup/groups.directive.js"></script>
-    <script src="app/components/home/directives/currentGroup/currentGroup.directive.js"></script>
-    <!-- Home Current Document -->
-    <script src="app/components/home/directives/currentDoc/doc.directive.js"></script>
-    <script src="app/components/home/directives/currentDoc/doc.controller.js"></script>
+        <!-- Carousel -->
+        <script src="app/components/home/directives/carousel/carousel.directive.js"></script> 
+
+        <!--Home.Groups -->
+        <script src="app/components/home/directives/selectGroup/groups.controller.js"></script> 
+        <script src="app/components/home/directives/selectGroup/groups.directive.js"></script>
+        <script src="app/components/home/directives/currentGroup/currentGroup.directive.js"></script>
+        <!-- Home Current Document -->
+        <script src="app/components/home/directives/currentDoc/doc.directive.js"></script>
+        <script src="app/components/home/directives/currentDoc/doc.controller.js"></script>
 
     <!-- Upload Module -->
     <script src="app/components/upload/upload.module.js"></script>
@@ -96,6 +104,7 @@
     <!-- Search Module -->
     <script src="app/components/search/search.module.js"></script>
     <script src ="app/components/search/config.route.js" ></script>
+    <script src="app/components/search/search.controller.js"></script>
     <script src="app/components/search/directives/currentDoc/currentDoc.directive.js"></script>
     <script src="app/components/search/directives/selectDoc/selectDoc.directive.js"></script>
 
@@ -177,17 +186,6 @@
         <script src="app/components/admin/system/system.controller.js"></script>
         <script src="app/components/admin/system/system.service.js"></script>
 
-    <script>
-        $('#radioContainer > input').each(function () {
-            var radioInput = $(this);
-            if (radioInput.is(':checked')) {
-                $('#radioContainer').animate({
-                    scrollTop: radioInput.offset().top
-                }, 2000);
-            }
-        });
-    </script>
 
   </body>
-
 </html>

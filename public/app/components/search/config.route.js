@@ -9,7 +9,8 @@
 
   function configFunction($routeProvider) {
     $routeProvider.when('/search', {
-      templateUrl: 'app/components/search/searchView.html'
+      templateUrl: 'app/components/search/searchView.html',
+      scope:{}
     });
   }
 
