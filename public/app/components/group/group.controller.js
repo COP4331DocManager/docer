@@ -1,4 +1,4 @@
-(function(){
+(function () {
     //Read up here http://stackoverflow.com/questions/21444100/angularjs-how-to-http-get-data-and-store-it-in-service
 
     'use strict';
@@ -6,89 +6,122 @@
 
     app.controller('GroupController', GroupController);
 
-    GroupController.inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData'];
-    function GroupController($rootScope, $scope, Restangular){
-        
-        
-         Restangular.all('test').getList().then(function(response) {
-            var plain = response.plain();
-            $scope.slides = plain;
-            //console.log("carousel rest: ", plain);
+    GroupController.inject = ['$scope', 'Restangular', '$http'];
+    function GroupController($scope, Restangular, $http) {
+        $scope.groupName = '';
+        $scope.userName = '';
+        $scope.createGroupMessage = '';
+        $scope.createGroupStatus = '';
+        $scope.addGroupMemberMessage = '';
+        $scope.dropGroupMemberMessage = '';
+        $scope.promoteGroupMemberMessage = '';
+        $scope.showCreateStatus = false;
+        $scope.showLeaveStatus = false;
+        $scope.showaddMemberStatusStatus = false;
+        $scope.showDropMemberStatusStatus = false;
+        $scope.showPromoteMemberStatusStatus = false;
+
+        $http.get('/api/home')
+            .success(function (data) {
+
+                // this.groups = data['groups'];
+                // this.documents = data['documents'];
+            }).error(function (data) {
+
         });
-        
-    
-        
-        var data = {
-            "groups": [
-              {
-              "id": 1,
-              "name": "memes",
-              "members": [
-                {
-                  "id": 1,
-                  "name": "Shitfuck"
-                },
-                {
-                  "id": 2,
-                  "name": "Asshole"
-                }
-              ] 
-                },
-                {
-              "id": 2,
-              "name": "Trump",
-              "members": [
-                {
-                  "id": 2,
-                  "name": "Donkey Fucker"
-                },
-                {
-                  "id": 3,
-                  "name": "Mountain Goat of Anal Destruction"
-                }
-              ]
+
+        $scope.submitCreateGroup = function () {
+            if ($scope.groupName) {
+                var groupName = {name: $scope.groupName};
+                $http.post('/api/create-group', groupName)
+                    .success(function (data) {
+                        $scope.createGroupMessage = 'The group has been created';
+                        $scope.createGroupStatus = 'success';
+                        $scope.showCreateStatus = true;
+                    }).error(function (data) {
+                    $scope.createGroupMessage = 'An error has occurred';
+                    $scope.createGroupStatus = 'danger';
+                    $scope.showCreateStatus = true;
+                });
             }
-              ],
-              "documents": [
-                {
-                  "document_id": 13,
-                  "group_id": 1,
-                  "metaTags": []
-                },
-                {
-                  "document_id": 14,
-                  "group_id": 1,
-                  "metaTags": [
-                    {
-                      "name": "name",
-                      "value": "Wv8QdXY.jpg"
-                    }
-                  ]
-                },
-                {
-                  "document_id": 33,
-                  "group_id": 1,
-                  "metaTags": [
-                    {
-                      "name": "name",
-                      "value": "security-101-book-e1477949975330.jpg"
-                    }
-                  ]
-                },
-                {
-                  "document_id": 40,
-                  "group_id": 1,
-                  "metaTags": [
-                    {
-                      "name": "name",
-                      "value": "tiny_hippo.png"
-                    }
-                  ]
-                }
-              ]
-            };
-            
-        this.groups = data['groups'];
+        };
+        $scope.createGroup = $scope.submitCreateGroup;
+
+        // This leaves the user form the current group.
+        $scope.submitLeaveGroup = function () {
+            // TODO: Fix this hard coded data
+            var leaveGroup = {group_id: 5, self: true};
+            $http.post('/api/delete-member', leaveGroup)
+                .success(function (data) {
+                    $scope.leaveGroupMessage = 'You have left the group';
+                    $scope.leaveGroupStatus = 'success';
+                    $scope.showLeaveStatus = true;
+                }).error(function (data) {
+                $scope.leaveGroupMessage = 'An error has occurred';
+                $scope.leaveGroupStatus = 'danger';
+                $scope.showLeaveStatus = true;
+            });
+        };
+        $scope.leaveGroup = $scope.submitLeaveGroup;
+
+
+
+        // Add member to a group
+        $scope.submitAddGroupMember = function () {
+            // TODO: Fix this hard coded data
+            console.log($scope.userName);
+            if ($scope.userName) {
+                var addMember = {group_id: 20, user: $scope.userName};
+                $http.post('/api/add-member', addMember)
+                    .success(function (data) {
+                        $scope.addGroupMemberMessage = 'You have added the group member';
+                        $scope.addGroupMemberStatus = 'success';
+                        $scope.showAddMemberStatusStatus = true;
+                    }).error(function (data) {
+                    $scope.addGroupMemberMessage = 'An error has occurred';
+                    $scope.addGroupMemberStatus = 'danger';
+                    $scope.showAddMemberStatusStatus = true;
+                });
+            }
+        };
+        $scope.addGroupMember = $scope.submitAddGroupMember;
+
+
+        // Drop member from a group
+        $scope.submitDropGroupMember = function () {
+            // TODO: Fix this hard coded data
+            var dropMember = {group_id: 20, user_id: 3};
+            $http.post('/api/delete-member', dropMember)
+                .success(function (data) {
+                    $scope.dropGroupMemberMessage = 'You have dropped the group member';
+                    $scope.dropGroupMemberStatus = 'success';
+                    $scope.showDropMemberStatusStatus = true;
+                }).error(function (data) {
+                $scope.dropGroupMemberMessage = 'An error has occurred';
+                $scope.dropGroupMemberStatus = 'danger';
+                $scope.showDropMemberStatusStatus = true;
+            });
+        };
+        $scope.dropGroupMember = $scope.submitDropGroupMember;
+
+
+
+        // Promote member to a group leader
+        $scope.submitPromoteGroupMember = function () {
+            // TODO: Fix this hard coded data
+            var promoteMember = {group_id: 20, user_id: 3};
+            $http.post('/api/promote-member', promoteMember)
+                .success(function (data) {
+                    $scope.promoteGroupMemberMessage = 'You have promoted the group member';
+                    $scope.promoteGroupMemberStatus = 'success';
+                    $scope.showPromoteMemberStatusStatus = true;
+                }).error(function (data) {
+                $scope.promoteGroupMemberMessage = 'An error has occurred';
+                $scope.promoteGroupMemberStatus = 'danger';
+                $scope.showPromoteMemberStatusStatus = true;
+            });
+        };
+        $scope.promoteGroupMember = $scope.submitPromoteGroupMember;
     }
 
 })();

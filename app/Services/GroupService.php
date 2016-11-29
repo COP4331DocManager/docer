@@ -121,8 +121,8 @@ class GroupService
 
     public function updateGroupAdmins($group_id, $admins)
     {
-        if(GroupServices::isGroupAdmin($group_id) != True) {
-            return response()->json('Error: User is not an admin of group ' . $group, 403);
+        if($this->isGroupAdmin($group_id) != True) {
+            return response()->json('Error: User is not an admin of group ' . $group_id, 403);
         }
         DB::table('users_groups')
             ->where('users_groups.group_id', $group_id)
@@ -134,7 +134,7 @@ class GroupService
             ->whereIn('users_groups.user_id', $admins)
             ->update(['is_admin' => True]);
 
-        return response()->json(GroupServices::readGroup($group_id));
+        return response()->json($this->readGroup($group_id));
     }
 
     public function destroyGroup($group_id)
