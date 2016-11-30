@@ -21,7 +21,7 @@
 	};
     CurrentGroup.$inject = ['$scope'];
 */
- 	app.directive('selectDoc', function(){
+ 	app.directive('searchSelectDoc', function(){
 		return{
 			restrict: 'E',
 			templateUrl: "/app/components/search/directives/selectDoc/selectDoc.html",

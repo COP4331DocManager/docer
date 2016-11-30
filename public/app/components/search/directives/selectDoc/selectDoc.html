@@ -12,7 +12,7 @@
             <div class="col-md-8 col-xs-8">
                 <div class="ui-menu">
                     <md-radio-group ng-model="current.slide" class="md-primary">
-                        <md-radio-button ng-repeat="document in searchResults" ng-value="document.document_id -1" ng-disabled=" member.isDisabled ">
+                        <md-radio-button ng-repeat="document in searchResults" ng-value="$index" ng-disabled=" member.isDisabled ">
                             Document: {{ document.document_id }}
                         </md-radio-button>
                     </md-radio-group>
