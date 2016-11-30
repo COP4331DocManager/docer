@@ -14,7 +14,7 @@
         
         this.search = function ()
         {
-            $http.post('/api/search', $.param({'src' : $rootScope.searchQuery}))
+            $http.post('/api/search', {'str' : $rootScope.searchQuery})
                 .success(function(data){
                     $rootScope.searchResults = data;
                     $location.path('/search');
