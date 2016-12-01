@@ -13,8 +13,10 @@
 	  	"ngCookies",
 	  	'restangular',
 	  	"ngMaterial",
+        "ngMessages",
         'angular-carousel',
         'angular.img',
+        
 
       	/*custom*/
 		'app.nav',

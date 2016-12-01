@@ -75,7 +75,12 @@
         };
         $scope.addGroupMember = $scope.submitAddGroupMember;
 
-
+        $scope.getData = function(){
+            $http.get('/api/home')
+                .success(function (data){
+                    $scope.groups = data['groups'];
+                })
+        }
         // Drop member from a group
         $scope.submitDropGroupMember = function () {
             var dropMember = {group_id: $scope.current.group.id, user_id: $scope.current.member.id};
@@ -84,6 +89,8 @@
                     $scope.dropGroupMemberMessage = 'You have dropped the group member';
                     $scope.dropGroupMemberStatus = 'success';
                     $scope.showDropMemberStatusStatus = true;
+                    $scope.getData();
+                    
                 }).error(function (data) {
                 $scope.dropGroupMemberMessage = 'An error has occurred';
                 $scope.dropGroupMemberStatus = 'danger';

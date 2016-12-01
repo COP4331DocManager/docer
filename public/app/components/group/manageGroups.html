@@ -1,38 +1,116 @@
-<!-- Page Content -->
-<div class="container-fluid" style="padding-top: 50px;">
-
-    <div class="row">
+<div class="row">
         <div class="col-md-12 col-lg-12 center">
             <h1>Manage Groups:</h1>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="row">
-                <div class='col-xs-12'>
-                    <group-list></group-list>
-                    <group-current></group-current>
-                </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="row">
+            <div class='col-xs-12'>
+                <group-list></group-list>
+                <group-current></group-current>
             </div>
         </div>
+    </div>
 
 
-        <div class="col-xs-6">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="row well">
-                        <div class="col-xs-12">
-                            <form ng-submit="submitAddGroupMember()">
-                                <a ng-click="addGroupMember()">
+    <div class="col-xs-6">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="row well">
+                    <div class="col-xs-12">
+                        <form ng-submit="submitAddGroupMember()">
+                            <a ng-click="addGroupMember()">
+                                <div class="panel panel-green">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-user-plus fa-4x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="big">Add Member</div>
+                                                <div>Add a Member to the Group</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="form-group" style="margin-top: 30px">
+                                <label>Enter the Email of a User</label>
+                                <input class="form-control" id="email" ng-model="userName"
+                                       placeholder="Ex. example@example.com">
+                            </div>
+                        </form>
+                        <div class="alert alert-{{addGroupMemberStatus}}" ng-show="showAddMemberStatusStatus">
+                            {{addGroupMemberMessage}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <form ng-submit="submitDropGroupMember()">
+                            <a ng-click="dropGroupMember()">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-user-times fa-4x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="big">Drop Member</div>
+                                                <div>Remove a Member from the Group</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </form>
+                        <div class="alert alert-{{dropGroupMemberStatus}}" ng-show="showDropMemberStatusStatus">
+                            {{dropGroupMemberMessage}}
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <form ng-submit="submitPromoteGroupMember()">
+                            <a ng-click="promoteGroupMember()">
+                                <div class="panel panel-yellow">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-plus fa-4x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <div class="big">Promote User</div>
+                                                <div>Promote a User to Group Owner</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </form>
+                        <div class="alert alert-{{promoteGroupMemberStatus}}" ng-show="showPromoteMemberStatusStatus">
+                            {{promoteGroupMemberMessage}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div class="well">
+                            <form ng-submit="submitCreateGroup()">
+                                <a ng-click="createGroup()">
                                     <div class="panel panel-green">
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-xs-3">
-                                                    <i class="fa fa-user-plus fa-4x"></i>
+                                                    <i class="fa fa-share fa-4x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="big">Add Member</div>
-                                                    <div>Add a Member to the Group</div>
+                                                    <div class="big">Create Group</div>
+                                                    <div>Create a New Group</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -40,136 +118,38 @@
                                 </a>
 
                                 <div class="form-group" style="margin-top: 30px">
-                                    <label>Enter the Email of a User</label>
-                                    <input class="form-control" id="email" ng-model="userName"
-                                           placeholder="Ex. example@example.com">
+                                    <label>Enter the Name of the Group You Wish to Create</label>
+                                    <input class="form-control" id="name" ng-model="groupName"
+                                           placeholder="Ex. Senior Design Group 6">
+                                </div>
+                                <div class="alert alert-{{createGroupStatus}}" ng-show="showCreateStatus">
+                                    {{createGroupMessage}}
                                 </div>
                             </form>
-                            <div class="alert alert-{{addGroupMemberStatus}}" ng-show="showAddMemberStatusStatus">
-                                {{addGroupMemberMessage}}
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <form ng-submit="submitDropGroupMember()">
-                                <a ng-click="dropGroupMember()">
-                                    <div class="panel panel-primary">
+                            <form ng-submit="submitLeaveGroup()">
+                                <a ng-click="leaveGroup()">
+                                    <div class="panel panel-red">
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-xs-3">
-                                                    <i class="fa fa-user-times fa-4x"></i>
+                                                    <i class="fa fa-times fa-4x"></i>
                                                 </div>
                                                 <div class="col-xs-9 text-right">
-                                                    <div class="big">Drop Member</div>
-                                                    <div>Remove a Member from the Group</div>
+                                                    <div class="big">Leave Group</div>
+                                                    <div>Remove Yourself From the Group</div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="alert alert-{{leaveGroupStatus}}" ng-show="showLeaveStatus">
+                                        {{leaveGroupMessage}}
                                     </div>
                                 </a>
                             </form>
-                            <div class="alert alert-{{dropGroupMemberStatus}}" ng-show="showDropMemberStatusStatus">
-                                {{dropGroupMemberMessage}}
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <form ng-submit="submitPromoteGroupMember()">
-                                <a ng-click="promoteGroupMember()">
-                                    <div class="panel panel-yellow">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <i class="fa fa-plus fa-4x"></i>
-                                                </div>
-                                                <div class="col-xs-9 text-right">
-                                                    <div class="big">Promote User</div>
-                                                    <div>Promote a User to Group Owner</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </form>
-                            <div class="alert alert-{{promoteGroupMemberStatus}}" ng-show="showPromoteMemberStatusStatus">
-                                {{promoteGroupMemberMessage}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6">
-
-                    <div class="row">
-
-                        <div class="col-xs-12">
-                            <div class="well">
-                                <form ng-submit="submitCreateGroup()">
-                                    <a ng-click="createGroup()">
-                                        <div class="panel panel-green">
-                                            <div class="panel-heading">
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <i class="fa fa-share fa-4x"></i>
-                                                    </div>
-                                                    <div class="col-xs-9 text-right">
-                                                        <div class="big">Create Group</div>
-                                                        <div>Create a New Group</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <div class="form-group" style="margin-top: 30px">
-                                        <label>Enter the Name of the Group You Wish to Create</label>
-                                        <input class="form-control" id="name" ng-model="groupName"
-                                               placeholder="Ex. Senior Design Group 6">
-                                    </div>
-                                    <div class="alert alert-{{createGroupStatus}}" ng-show="showCreateStatus">
-                                        {{createGroupMessage}}
-                                    </div>
-                                </form>
-                                <form ng-submit="submitLeaveGroup()">
-                                    <a ng-click="leaveGroup()">
-                                        <div class="panel panel-red">
-                                            <div class="panel-heading">
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <i class="fa fa-times fa-4x"></i>
-                                                    </div>
-                                                    <div class="col-xs-9 text-right">
-                                                        <div class="big">Leave Group</div>
-                                                        <div>Remove Yourself From the Group</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="alert alert-{{leaveGroupStatus}}" ng-show="showLeaveStatus">
-                                            {{leaveGroupMessage}}
-                                        </div>
-                                    </a>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-<hr>
-
-
-<!-- Footer -->
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <p>Docer Project 2016</p>
-        </div>
-    </div>
-    <!-- /.row -->
-</footer>
-
 </div>
