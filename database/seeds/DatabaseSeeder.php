@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-        $faker->seed(123);
+        $faker->seed(1234);
 
         // $this->call(UsersTableSeeder::class);
         Model::unguard();
@@ -127,6 +127,21 @@ class DatabaseSeeder extends Seeder
             ['user_id' => 2, 'group_id' => 5],
             ['user_id' => 2, 'group_id' => 6],
         ]);
+
+        for($i = 0; $i < 80; $i++)
+        {
+            $userId = $faker->unique()->numberBetween(1, 100);
+            dump($userId);
+            if($userId == 0 || $userId == 1 || $userId == 2){
+                continue;
+            }
+
+            DB::table('users_groups')->insert([
+                ['user_id' => $userId, 'group_id' => mt_rand(1,6)],
+            ]);
+        }
+
+
         dump('Seeded users_groups');
 
 
