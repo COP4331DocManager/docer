@@ -7,16 +7,14 @@
         </div>
         <ul class="list-group">
             <div class="row">
-                <div class="col-md-2 col-xs-2">
-            </div>
-            <div class="col-md-8 col-xs-8">
-                <div class="ui-menu float left">
-                    <md-radio-group ng-model="current.member" class="md-primary">
+                <div class="col-md-8 col-xs-8">
+                    <div class="ui-menu">
+                        <md-radio-group ng-model="current.member" class="md-primary">
             
-                        <md-radio-button ng-repeat="member in current.group.members" ng-value="member" ng-disabled=" member.isDisabled " >
-                        Member: {{ member.name }}
-                        </md-radio-button>
-                    </md-radio-group>
+                            <md-radio-button ng-repeat="member in current.group.members" ng-value="member" ng-disabled=" member.isDisabled " >
+                            <b>Member: </b>{{ member.name }}
+                            </md-radio-button>
+                        </md-radio-group>
                     </div>
                 </div>
             </div>
