@@ -33,7 +33,7 @@
                        aria-expanded="false">Views <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/group/">Groups</a></li>
-                        <li><a href="#/admin/">Admin</a></li>
+                        <li ng-show="globals.currentUser.user.isAdmin"><a href="#/admin/">Admin</a></li>
                     </ul>
                 </li>
                 
