@@ -29,6 +29,7 @@
                         $scope.createGroupMessage = 'The group has been created';
                         $scope.createGroupStatus = 'success';
                         $scope.showCreateStatus = true;
+                        $scope.data.groups.push(data);
                     }).error(function (data) {
                     $scope.createGroupMessage = 'An error has occurred';
                     $scope.createGroupStatus = 'danger';
@@ -46,6 +47,7 @@
                     $scope.leaveGroupMessage = 'You have left the group';
                     $scope.leaveGroupStatus = 'success';
                     $scope.showLeaveStatus = true;
+                    $scope.getData(); 
                 }).error(function (data) {
                 $scope.leaveGroupMessage = 'An error has occurred';
                 $scope.leaveGroupStatus = 'danger';
@@ -66,6 +68,9 @@
                         $scope.addGroupMemberMessage = 'You have added the group member';
                         $scope.addGroupMemberStatus = 'success';
                         $scope.showAddMemberStatusStatus = true;
+                        $scope.current.group = data;
+                        $scope.getData();
+                        $scope.$apply;
                     }).error(function (data) {
                     $scope.addGroupMemberMessage = 'An error has occurred';
                     $scope.addGroupMemberStatus = 'danger';
@@ -78,8 +83,10 @@
         $scope.getData = function(){
             $http.get('/api/home')
                 .success(function (data){
-                    $scope.groups = data['groups'];
-                })
+                    $scope.data = data;
+                    $scope.$apply;
+                });
+
         }
         // Drop member from a group
         $scope.submitDropGroupMember = function () {
@@ -89,6 +96,7 @@
                     $scope.dropGroupMemberMessage = 'You have dropped the group member';
                     $scope.dropGroupMemberStatus = 'success';
                     $scope.showDropMemberStatusStatus = true;
+                    $scope.current.group = data;
                     $scope.getData();
                     
                 }).error(function (data) {
