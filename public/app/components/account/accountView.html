@@ -1,10 +1,10 @@
 <div class="row ">
     <div class="col-xs-6 thumbnail">
         <md-content layout-padding="">
-            <form name="projectForm">
+            <form name="form" ng-submit="accCtrl.update()" role="form">
                 <md-input-container class="md-block">
                     <label>Name</label>
-                    <input required="" name="name" ng-model="$globals.currentUser.name"/>
+                    <input required="" id="name" name="name" ng-model="globals.currentUser.user.name"/>
                     <div ng-messages="projectForm.name.$error">
                         <div ng-message="required">This is required.</div>
                     </div>
@@ -12,13 +12,22 @@
         
                 <md-input-container class="md-block">
                     <label>Email</label>
-                    <input required="" type="email" name="email" ng-model="globals.currentUser.email" minlength="4" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+                    <input required="" id="email" type="email" name="email" ng-model="globals.currentUser.user.email" minlength="4" maxlength="100" ng-pattern="/^.+@.+\..+$/">
                     <div ng-messages="projectForm.email.$error" role="alert">
                         <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
                             Your email must be between 10 and 100 characters long and look like an e-mail address.
                         </div>
                     </div>
                 </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" ng-model="accCtrl.pass"/>
+                    <div ng-messages="projectForm.name.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+                
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-6 col-xs-offset-3 thumbnail text-center">

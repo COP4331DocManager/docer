@@ -10,6 +10,8 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 use Validator;
+use Auth;
+
 
 class AuthenticateController extends Controller
 {
@@ -59,7 +61,7 @@ class AuthenticateController extends Controller
         }
 
         // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        return response()->json(["token" => $token, "user" => Auth::user()]);
     }
     
     //invalidate token and return json result

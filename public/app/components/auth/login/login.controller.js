@@ -20,7 +20,7 @@
             vm.dataLoading = true;
             AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.token) {
-                    AuthenticationService.SetCredentials(vm.username, response.token);
+                    AuthenticationService.SetCredentials(response.user, response.token);
                     $location.path('/');
                 } else {
                     //TODO: better error message

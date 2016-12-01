@@ -17,7 +17,7 @@
                 .then(function (response) {
                     if (response.token) {
                         FlashService.Success('Registration successful', true);
-                        AuthenticationService.SetCredentials(vm.user.email, response.token);
+                        AuthenticationService.SetCredentials(response.user, response.token);
                         $location.path('/');
                     } else {
                         //TODO: better error message

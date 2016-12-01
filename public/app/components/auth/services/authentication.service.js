@@ -61,10 +61,10 @@
             });
         }
 
-        function SetCredentials(email, token) {
+        function SetCredentials(user, token) {
             $rootScope.globals = {
                 currentUser: {
-                    email: email, //not sure if we need to keep track of the email? to show on nav bar later? meh
+                    user: user,
                     token: token,
                 }
             };

@@ -65,6 +65,18 @@ class UserController extends Controller
         if($isAdmin != True && $request['id'] != Auth::id()) {
             return response()->json("Error: User is not Authorized", 403);
         }
+        
+        if($request->has('pass'))
+        {
+            try
+            {
+                app(UserService::class)->updatePassword($request["id"], $request["pass"]);
+            }
+            catch(\Exception $e)
+            {
+                return response()->json("error", 422);
+            }
+        }
 
         try
         {

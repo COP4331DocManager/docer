@@ -9,7 +9,9 @@
 
   function configFunction($routeProvider) {
     $routeProvider.when('/account', {
-      templateUrl: 'app/components/account/accountView.html'
+      templateUrl: 'app/components/account/accountView.html',
+      controller: 'AccountController',
+      controllerAs: "accCtrl"
     });
   }
 

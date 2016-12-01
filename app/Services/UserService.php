@@ -25,6 +25,13 @@ class UserService
         $user->email = $email;
         $user->save();
     }
+    
+    public function updatePassword($user_id, $pass)
+    {
+        $user = User::findOrFail($user_id);
+        $user->password = bcrypt($pass);
+        $user->save();
+    }
 
     public function readUser($user_id)
     {
