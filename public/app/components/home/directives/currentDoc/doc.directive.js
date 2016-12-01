@@ -6,7 +6,9 @@
     app.directive('docInfo', function(){
 		return{
 			restrict: 'E',
-			templateUrl: "/app/components/home/directives/currentDoc/docView.html"
+			templateUrl: "/app/components/home/directives/currentDoc/docView.html",
+            controller: "HomeController",
+            controllerAs:"vm"
 		};
 	});
 

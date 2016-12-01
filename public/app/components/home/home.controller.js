@@ -6,8 +6,8 @@
 
     app.controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData','$http'];
-    function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData, $http){
+    HomeController.$inject = ['$rootScope', '$scope', 'Restangular', 'HomeInfo', 'HomeData','$http', 'AdminDocService'];
+    function HomeController($rootScope, $scope, Restangular, HomeInfo, HomeData, $http, AdminDocService){
 
       $http.get('/api/home')
             .success(function (data) {
@@ -21,8 +21,30 @@
         });
 
         
+        this.update = function() {
+            var pos = $scope.current.slide;
+            var slide = $scope.slides[pos];
+            
+            AdminDocService.updateDoc(slide.document_id, slide.metaTags).then(function(data){
+                $scope.message = data;
+                alert(data);
+            });
+        };
+        
+        $scope.homeAddNewChoice = function() {
+            $scope.slides[$scope.current.slide].metaTags.push({name: '', value: ''});
+        };
 
-
+        // Remove key/value pair.
+        $scope.homeRemoveChoice = function() {
+            // Only remove if there are more than 1.
+            if($scope.slides[$scope.current.slide].metaTags.length-1 >= 1)
+            {
+                var lastItem = $scope.slides[$scope.current.slide].metaTags.length-1;
+                $scope.slides[$scope.current.slide].metaTags.splice(lastItem);
+            }
+        };
+        
     }
 
 })();

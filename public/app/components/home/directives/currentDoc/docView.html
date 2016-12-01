@@ -10,16 +10,24 @@
 
                         <div classs="col-xs-5">
                             <label for="{{meta.name}}">Label:</label>
-                            <input id="{{meta.name}}" class="form-control" value="{{meta.name}}">
+                            <input id="{{meta.name}}" class="form-control" ng-model="meta.name">
                         </div>
                         <div class="col-xs-5 xs-offset-1">
                             <label for="{{meta.value}}">Value:</label>
-                            <input id="{{meta.value}}" class="form-control" value="{{meta.value}}">
+                            <input id="{{meta.value}}" class="form-control" ng-model="meta.value">
+                        </div>
+                        
+                        <div class="col-lg-2 col-md-2">
+                            <button type="button" class="btn btn-danger" ng-show="$last" ng-click="homeRemoveChoice()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        </div>
+                        
+                        <div class="col-xs-12 col-md-12">
+                            <button type="button" class="btn btn-default" ng-show="$last" ng-click="homeAddNewChoice()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                         <md-divider></md-divider>
                     </md-list-item>
                 </md-list>
-                <button class="btn-warning btn pull-right">Update Tags</button>
+                <button type="button" ng-click="vm.update()" class="btn btn-warning pull-right">Update Tags</button>
             </form>
         </md-content>
     </div>
