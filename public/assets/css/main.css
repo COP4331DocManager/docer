@@ -282,6 +282,8 @@ ul[rn-carousel] {
     background-size: contain;
     background-repeat: no-repeat;
     height: 100%;
+    width: 100%;
+    object-fit: contain;
     background-position: center center;
 }
 /* end for carousel */
