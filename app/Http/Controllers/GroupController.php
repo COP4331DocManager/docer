@@ -124,7 +124,7 @@ class GroupController extends Controller
     {
 		$req = $request->only('group_id', 'user_id');
         $validator = Validator::make($req, [
-            'user_id' => 'require',
+            'user_id' => 'required',
             'group_id' => 'required|integer'
         ]);
         if($validator->fails()) {
