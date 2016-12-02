@@ -173,7 +173,7 @@ class DocumentService
         $paramArray[] = $user['id'];
 
         foreach($strings as $val) {
-            $stmt .= 'document_meta_tags.value like ? and ';
+            $stmt .= 'document_meta_tags.value like ? or ';
             $paramArray[] = '%'.$val.'%';
         }
         $stmt = substr($stmt, 0, -4);
