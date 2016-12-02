@@ -122,9 +122,9 @@ class GroupController extends Controller
 
     public function updateGroupAdmins(Request $request)
     {
-        $req = $request->only('group_id', 'admins');
+		$req = $request->only('group_id', 'user_id');
         $validator = Validator::make($req, [
-            'admins' => 'require',
+            'user_id' => 'require',
             'group_id' => 'required|integer'
         ]);
         if($validator->fails()) {
@@ -134,7 +134,7 @@ class GroupController extends Controller
             return response()->json('Error: User is not authorized', 403);
         }
 
-       return $this->service->updateGroupAdmins($req['group_id'], $req['admins']);
+       return $this->service->updateGroupAdmins($req['group_id'], $req['user_id']);
     }
 
     public function destroyGroup(Request $request)
