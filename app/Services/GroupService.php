@@ -119,7 +119,7 @@ class GroupService
         return ($sysAdmin + $admin) > 0;
     }
 
-    public function updateGroupAdmins($group_id, $admins)
+    public function updateGroupAdmins($group_id, $admin)
     {
         $userID = DB::table('users')
             ->orWhere('name', '=',  $admin)
